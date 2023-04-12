@@ -1,0 +1,77 @@
+#########################################
+Members:
+
+Diya Roshan Sanghvi (Github ID - diyasanghvii)
+1225577639   dsanghv3@asu.edu
+
+Harshitha Karur (Github ID - harshithakarur)
+1226508636   hkarur@adu.edu
+
+Adam Shoaib Kareem Sab (Github ID - adamshoaib)
+1225468309   akareems@asu.edu 
+
+Aditi Pandey (Github ID - aditiukd)
+1225595072   apande66@asu.edu
+
+Dhwanil Parimalsinh Vashi (Github ID - dvashi21asu)
+1226280551   dvashi1@asu.edu
+
+#########################################
+Contribution upto Milestone-1:
+
+Entire team: Brainstorming, reading up about parser and interpreter, EBNF grammer, etc.
+
+Diya Roshan Sanghvi:
+- Language Design
+- Milestone-1 doc preparation
+- Language Grammer
+
+Harshitha Karur:
+- Language Design
+- Milestone-1 doc preparation
+
+Adam Shoaib Kareem Sab: 
+- Language Design
+- Milestone-1 doc preparation
+
+Aditi Pandey:
+- Milestone-1 doc preparation
+- Language Grammer
+
+Dhwanil Parimalsinh Vashi:
+- Milestone-1 doc preparation
+- Language Grammer
+#########################################
+Contribution plan after Milestone-1:
+
+Diya Roshan Sanghvi:
+- Work on interpreter
+- Work on language documentation
+- Work on ppt and video
+- Create and run 3 test programs
+
+Harshitha Karur:
+- Work on parser
+- Work on language documentation
+- Work on ppt and video
+- Create and run 3 test programs
+
+Adam Shoaib Kareem Sab:
+- Work on parser
+- Work on language documentation
+- Work on ppt and video
+- Create and run 3 test programs
+
+Aditi Pandey:
+- Work on interpreter
+- Work on language documentation
+- Work on ppt and video
+- Create and run 3 test programs
+
+Dhwanil Parimalsinh Vashi:
+- Work on interpreter
+- Work on language documentation
+- Work on ppt and video
+- Create and run 3 test programs
+#########################################
+

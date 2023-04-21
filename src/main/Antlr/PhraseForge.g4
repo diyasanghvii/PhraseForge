@@ -1,8 +1,6 @@
 grammar PhraseForge;
 
-forge_pgm
-	: 'pf_launch' phrase_blk 'pf_abort'
-	;
+forge_pgm: 'pf_launch' phrase_blk 'pf_abort';
 
 phrase_blk
 	: '{' forge_cmd+ '}'

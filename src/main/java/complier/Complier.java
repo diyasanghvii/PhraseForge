@@ -1,4 +1,4 @@
-package compiler;
+package complier;
 
 public class Complier {
     

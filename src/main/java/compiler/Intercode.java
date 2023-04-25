@@ -1,4 +1,4 @@
-package complier;
+package compiler;
 public class Intercode {
 
     private String iCode = "";

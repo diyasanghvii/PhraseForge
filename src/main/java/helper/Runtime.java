@@ -32,4 +32,8 @@ public class Runtime {
         switch (instructionType) {
         }
         return 0;}
+
+    public String getOutput() {
+        return "Output";
+    }
 }

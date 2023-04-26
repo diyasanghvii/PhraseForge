@@ -3,8 +3,11 @@ package gen;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class PhraseForgeParser extends Parser {
@@ -326,6 +329,66 @@ public class PhraseForgeParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Forge_asrtContext extends ParserRuleContext {
+		public Forge_asrtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_forge_asrt; }
+	 
+		public Forge_asrtContext() { }
+		public void copyFrom(Forge_asrtContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class PhraseAssignmentContext extends Forge_asrtContext {
+		public TerminalNode FORGE_VAR() { return getToken(PhraseForgeParser.FORGE_VAR, 0); }
+		public TerminalNode EQT() { return getToken(PhraseForgeParser.EQT, 0); }
+		public TerminalNode PHRASE_STR() { return getToken(PhraseForgeParser.PHRASE_STR, 0); }
+		public Asrt_ternContext asrt_tern() {
+			return getRuleContext(Asrt_ternContext.class,0);
+		}
+		public PhraseAssignmentContext(Forge_asrtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterPhraseAssignment(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitPhraseAssignment(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitPhraseAssignment(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class LogicAssignmentContext extends Forge_asrtContext {
+		public TerminalNode FORGE_VAR() { return getToken(PhraseForgeParser.FORGE_VAR, 0); }
+		public TerminalNode EQT() { return getToken(PhraseForgeParser.EQT, 0); }
+		public Asrt_boolContext asrt_bool() {
+			return getRuleContext(Asrt_boolContext.class,0);
+		}
+		public Asrt_ternContext asrt_tern() {
+			return getRuleContext(Asrt_ternContext.class,0);
+		}
+		public LogicAssignmentContext(Forge_asrtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterLogicAssignment(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitLogicAssignment(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitLogicAssignment(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class QuantAssignmentContext extends Forge_asrtContext {
 		public TerminalNode FORGE_VAR() { return getToken(PhraseForgeParser.FORGE_VAR, 0); }
 		public TerminalNode EQT() { return getToken(PhraseForgeParser.EQT, 0); }
 		public Asrt_numContext asrt_num() {
@@ -334,25 +397,18 @@ public class PhraseForgeParser extends Parser {
 		public Asrt_ternContext asrt_tern() {
 			return getRuleContext(Asrt_ternContext.class,0);
 		}
-		public Asrt_boolContext asrt_bool() {
-			return getRuleContext(Asrt_boolContext.class,0);
-		}
-		public TerminalNode PHRASE_STR() { return getToken(PhraseForgeParser.PHRASE_STR, 0); }
-		public Forge_asrtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_forge_asrt; }
+		public QuantAssignmentContext(Forge_asrtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterForge_asrt(this);
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterQuantAssignment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitForge_asrt(this);
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitQuantAssignment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitForge_asrt(this);
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitQuantAssignment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -366,6 +422,7 @@ public class PhraseForgeParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
+				_localctx = new QuantAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(62);
@@ -387,6 +444,7 @@ public class PhraseForgeParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new QuantAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(68);
@@ -400,6 +458,7 @@ public class PhraseForgeParser extends Parser {
 				}
 				break;
 			case 3:
+				_localctx = new LogicAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(72);
@@ -421,6 +480,7 @@ public class PhraseForgeParser extends Parser {
 				}
 				break;
 			case 4:
+				_localctx = new LogicAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(78);
@@ -442,6 +502,7 @@ public class PhraseForgeParser extends Parser {
 				}
 				break;
 			case 5:
+				_localctx = new PhraseAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(84);
@@ -463,6 +524,7 @@ public class PhraseForgeParser extends Parser {
 				}
 				break;
 			case 6:
+				_localctx = new PhraseAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(90);
@@ -484,6 +546,7 @@ public class PhraseForgeParser extends Parser {
 				}
 				break;
 			case 7:
+				_localctx = new QuantAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(96);
@@ -495,6 +558,7 @@ public class PhraseForgeParser extends Parser {
 				}
 				break;
 			case 8:
+				_localctx = new LogicAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(99);
@@ -581,37 +645,117 @@ public class PhraseForgeParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Asrt_boolContext extends ParserRuleContext {
-		public Token op;
-		public Asrt_cmpContext asrt_cmp() {
-			return getRuleContext(Asrt_cmpContext.class,0);
+		public Asrt_boolContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
+		@Override public int getRuleIndex() { return RULE_asrt_bool; }
+	 
+		public Asrt_boolContext() { }
+		public void copyFrom(Asrt_boolContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class LogicExpressionInBracketsContext extends Asrt_boolContext {
+		public Asrt_boolContext asrt_bool() {
+			return getRuleContext(Asrt_boolContext.class,0);
+		}
+		public LogicExpressionInBracketsContext(Asrt_boolContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterLogicExpressionInBrackets(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitLogicExpressionInBrackets(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitLogicExpressionInBrackets(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class LogicLogicalExpressionContext extends Asrt_boolContext {
+		public Token op;
 		public List<Asrt_boolContext> asrt_bool() {
 			return getRuleContexts(Asrt_boolContext.class);
 		}
 		public Asrt_boolContext asrt_bool(int i) {
 			return getRuleContext(Asrt_boolContext.class,i);
 		}
-		public TerminalNode PHRASE_BOOL() { return getToken(PhraseForgeParser.PHRASE_BOOL, 0); }
-		public TerminalNode FORGE_VAR() { return getToken(PhraseForgeParser.FORGE_VAR, 0); }
 		public TerminalNode Logical_AND() { return getToken(PhraseForgeParser.Logical_AND, 0); }
 		public TerminalNode Logical_OR() { return getToken(PhraseForgeParser.Logical_OR, 0); }
 		public TerminalNode EqualTo() { return getToken(PhraseForgeParser.EqualTo, 0); }
 		public TerminalNode NotEqualTo() { return getToken(PhraseForgeParser.NotEqualTo, 0); }
-		public Asrt_boolContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_asrt_bool; }
+		public LogicLogicalExpressionContext(Asrt_boolContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterAsrt_bool(this);
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterLogicLogicalExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitAsrt_bool(this);
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitLogicLogicalExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitAsrt_bool(this);
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitLogicLogicalExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class LogicValContext extends Asrt_boolContext {
+		public TerminalNode PHRASE_BOOL() { return getToken(PhraseForgeParser.PHRASE_BOOL, 0); }
+		public LogicValContext(Asrt_boolContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterLogicVal(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitLogicVal(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitLogicVal(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class LogicComparisonExpressionContext extends Asrt_boolContext {
+		public Asrt_cmpContext asrt_cmp() {
+			return getRuleContext(Asrt_cmpContext.class,0);
+		}
+		public LogicComparisonExpressionContext(Asrt_boolContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterLogicComparisonExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitLogicComparisonExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitLogicComparisonExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class LogicVarExpressionContext extends Asrt_boolContext {
+		public TerminalNode FORGE_VAR() { return getToken(PhraseForgeParser.FORGE_VAR, 0); }
+		public LogicVarExpressionContext(Asrt_boolContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterLogicVarExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitLogicVarExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitLogicVarExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -637,12 +781,19 @@ public class PhraseForgeParser extends Parser {
 			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 			case 1:
 				{
+				_localctx = new LogicComparisonExpressionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+
 				setState(109);
 				asrt_cmp();
 				}
 				break;
 			case 2:
 				{
+				_localctx = new LogicExpressionInBracketsContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(110);
 				match(T__7);
 				setState(111);
@@ -653,12 +804,18 @@ public class PhraseForgeParser extends Parser {
 				break;
 			case 3:
 				{
+				_localctx = new LogicValContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(114);
 				match(PHRASE_BOOL);
 				}
 				break;
 			case 4:
 				{
+				_localctx = new LogicVarExpressionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(115);
 				match(FORGE_VAR);
 				}
@@ -674,15 +831,15 @@ public class PhraseForgeParser extends Parser {
 					_prevctx = _localctx;
 					{
 					{
-					_localctx = new Asrt_boolContext(_parentctx, _parentState);
+					_localctx = new LogicLogicalExpressionContext(new Asrt_boolContext(_parentctx, _parentState));
 					pushNewRecursionContext(_localctx, _startState, RULE_asrt_bool);
 					setState(118);
 					if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
 					setState(119);
-					((Asrt_boolContext)_localctx).op = _input.LT(1);
+					((LogicLogicalExpressionContext)_localctx).op = _input.LT(1);
 					_la = _input.LA(1);
 					if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 13400297963520L) != 0)) ) {
-						((Asrt_boolContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+						((LogicLogicalExpressionContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 					}
 					else {
 						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -782,6 +939,18 @@ public class PhraseForgeParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Asrt_numContext extends ParserRuleContext {
+		public Asrt_numContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_asrt_num; }
+	 
+		public Asrt_numContext() { }
+		public void copyFrom(Asrt_numContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class QuantMultiplyDivideExpressionContext extends Asrt_numContext {
 		public Token op;
 		public List<Asrt_numContext> asrt_num() {
 			return getRuleContexts(Asrt_numContext.class);
@@ -789,27 +958,104 @@ public class PhraseForgeParser extends Parser {
 		public Asrt_numContext asrt_num(int i) {
 			return getRuleContext(Asrt_numContext.class,i);
 		}
-		public TerminalNode PHRASE_NUM() { return getToken(PhraseForgeParser.PHRASE_NUM, 0); }
-		public TerminalNode Subtraction() { return getToken(PhraseForgeParser.Subtraction, 0); }
-		public TerminalNode FORGE_VAR() { return getToken(PhraseForgeParser.FORGE_VAR, 0); }
 		public TerminalNode Multiplication() { return getToken(PhraseForgeParser.Multiplication, 0); }
 		public TerminalNode Division() { return getToken(PhraseForgeParser.Division, 0); }
-		public TerminalNode Addition() { return getToken(PhraseForgeParser.Addition, 0); }
-		public Asrt_numContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_asrt_num; }
+		public QuantMultiplyDivideExpressionContext(Asrt_numContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterAsrt_num(this);
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterQuantMultiplyDivideExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitAsrt_num(this);
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitQuantMultiplyDivideExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitAsrt_num(this);
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitQuantMultiplyDivideExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class QuantBracketsExpressionContext extends Asrt_numContext {
+		public Asrt_numContext asrt_num() {
+			return getRuleContext(Asrt_numContext.class,0);
+		}
+		public QuantBracketsExpressionContext(Asrt_numContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterQuantBracketsExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitQuantBracketsExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitQuantBracketsExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class QuantOnlyContext extends Asrt_numContext {
+		public TerminalNode PHRASE_NUM() { return getToken(PhraseForgeParser.PHRASE_NUM, 0); }
+		public TerminalNode Subtraction() { return getToken(PhraseForgeParser.Subtraction, 0); }
+		public QuantOnlyContext(Asrt_numContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterQuantOnly(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitQuantOnly(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitQuantOnly(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class QuantIdentifierOnlyContext extends Asrt_numContext {
+		public TerminalNode FORGE_VAR() { return getToken(PhraseForgeParser.FORGE_VAR, 0); }
+		public TerminalNode Subtraction() { return getToken(PhraseForgeParser.Subtraction, 0); }
+		public QuantIdentifierOnlyContext(Asrt_numContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterQuantIdentifierOnly(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitQuantIdentifierOnly(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitQuantIdentifierOnly(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class QuantAdditionSubtractionExpressionContext extends Asrt_numContext {
+		public Token op;
+		public List<Asrt_numContext> asrt_num() {
+			return getRuleContexts(Asrt_numContext.class);
+		}
+		public Asrt_numContext asrt_num(int i) {
+			return getRuleContext(Asrt_numContext.class,i);
+		}
+		public TerminalNode Addition() { return getToken(PhraseForgeParser.Addition, 0); }
+		public TerminalNode Subtraction() { return getToken(PhraseForgeParser.Subtraction, 0); }
+		public QuantAdditionSubtractionExpressionContext(Asrt_numContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterQuantAdditionSubtractionExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitQuantAdditionSubtractionExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitQuantAdditionSubtractionExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -835,6 +1081,10 @@ public class PhraseForgeParser extends Parser {
 			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				{
+				_localctx = new QuantBracketsExpressionContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+
 				setState(131);
 				match(T__7);
 				setState(132);
@@ -845,6 +1095,9 @@ public class PhraseForgeParser extends Parser {
 				break;
 			case 2:
 				{
+				_localctx = new QuantOnlyContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(136);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -861,6 +1114,9 @@ public class PhraseForgeParser extends Parser {
 				break;
 			case 3:
 				{
+				_localctx = new QuantIdentifierOnlyContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(140);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -890,15 +1146,15 @@ public class PhraseForgeParser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 					case 1:
 						{
-						_localctx = new Asrt_numContext(_parentctx, _parentState);
+						_localctx = new QuantMultiplyDivideExpressionContext(new Asrt_numContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_asrt_num);
 						setState(145);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
 						setState(146);
-						((Asrt_numContext)_localctx).op = _input.LT(1);
+						((QuantMultiplyDivideExpressionContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==Multiplication || _la==Division) ) {
-							((Asrt_numContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+							((QuantMultiplyDivideExpressionContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
@@ -911,15 +1167,15 @@ public class PhraseForgeParser extends Parser {
 						break;
 					case 2:
 						{
-						_localctx = new Asrt_numContext(_parentctx, _parentState);
+						_localctx = new QuantAdditionSubtractionExpressionContext(new Asrt_numContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_asrt_num);
 						setState(148);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 						setState(149);
-						((Asrt_numContext)_localctx).op = _input.LT(1);
+						((QuantAdditionSubtractionExpressionContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==Addition || _la==Subtraction) ) {
-							((Asrt_numContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+							((QuantAdditionSubtractionExpressionContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
 							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;

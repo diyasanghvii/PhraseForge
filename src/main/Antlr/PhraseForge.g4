@@ -11,14 +11,14 @@ forge_cmd
 	;
 
 forge_asrt
-	: 'quant' FORGE_VAR (EQT asrt_num)?
-	| 'quant' FORGE_VAR EQT asrt_tern
-	| 'logic' FORGE_VAR (EQT asrt_bool)?
-	| 'logic' FORGE_VAR (EQT asrt_tern)?
-	| 'phrase' FORGE_VAR (EQT PHRASE_STR)?
-	| 'phrase' FORGE_VAR (EQT asrt_tern)?
-	| FORGE_VAR EQT asrt_num
-	| FORGE_VAR EQT asrt_bool
+	: 'quant' FORGE_VAR (EQT asrt_num)?    #quantAssignment
+	| 'quant' FORGE_VAR EQT asrt_tern      #quantAssignment
+	| 'logic' FORGE_VAR (EQT asrt_bool)?   #logicAssignment
+	| 'logic' FORGE_VAR (EQT asrt_tern)?   #logicAssignment
+	| 'phrase' FORGE_VAR (EQT PHRASE_STR)? #phraseAssignment
+	| 'phrase' FORGE_VAR (EQT asrt_tern)?  #phraseAssignment
+	| FORGE_VAR EQT asrt_num    #quantAssignment
+	| FORGE_VAR EQT asrt_bool   #logicAssignment
     ;
 
 asrts
@@ -27,11 +27,11 @@ asrts
     ;
 
 asrt_bool
-    : asrt_bool op=(Logical_AND|Logical_OR|EqualTo|NotEqualTo) asrt_bool
-    | asrt_cmp
-    | '(' asrt_bool ')'
-    | PHRASE_BOOL
-    | FORGE_VAR
+    : asrt_bool op=(Logical_AND|Logical_OR|EqualTo|NotEqualTo) asrt_bool #logicLogicalExpression
+    | asrt_cmp # logicComparisonExpression
+    | '(' asrt_bool ')' # logicExpressionInBrackets
+    | PHRASE_BOOL       # logicVal
+    | FORGE_VAR         # logicVarExpression
     ;
 
 asrt_cmp
@@ -39,11 +39,11 @@ asrt_cmp
     ;
 
 asrt_num
-    : asrt_num op=(Multiplication|Division) asrt_num
-    | asrt_num op=(Addition|Subtraction) asrt_num
-    | '(' asrt_num ')'
-    | Subtraction? PHRASE_NUM
-    | Subtraction? FORGE_VAR
+    : asrt_num op=(Multiplication|Division) asrt_num  #quantMultiplyDivideExpression
+    | asrt_num op=(Addition|Subtraction) asrt_num   #quantAdditionSubtractionExpression
+    | '(' asrt_num ')' #quantBracketsExpression
+    | Subtraction? PHRASE_NUM #quantOnly
+    | Subtraction? FORGE_VAR #quantIdentifierOnly
     ;
 
 asrt_eval

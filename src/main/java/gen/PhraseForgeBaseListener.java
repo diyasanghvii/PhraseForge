@@ -53,13 +53,37 @@ public class PhraseForgeBaseListener implements PhraseForgeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterForge_asrt(PhraseForgeParser.Forge_asrtContext ctx) { }
+	@Override public void enterQuantAssignment(PhraseForgeParser.QuantAssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitForge_asrt(PhraseForgeParser.Forge_asrtContext ctx) { }
+	@Override public void exitQuantAssignment(PhraseForgeParser.QuantAssignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogicAssignment(PhraseForgeParser.LogicAssignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogicAssignment(PhraseForgeParser.LogicAssignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPhraseAssignment(PhraseForgeParser.PhraseAssignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPhraseAssignment(PhraseForgeParser.PhraseAssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -77,13 +101,61 @@ public class PhraseForgeBaseListener implements PhraseForgeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAsrt_bool(PhraseForgeParser.Asrt_boolContext ctx) { }
+	@Override public void enterLogicExpressionInBrackets(PhraseForgeParser.LogicExpressionInBracketsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAsrt_bool(PhraseForgeParser.Asrt_boolContext ctx) { }
+	@Override public void exitLogicExpressionInBrackets(PhraseForgeParser.LogicExpressionInBracketsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogicLogicalExpression(PhraseForgeParser.LogicLogicalExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogicLogicalExpression(PhraseForgeParser.LogicLogicalExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogicVal(PhraseForgeParser.LogicValContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogicVal(PhraseForgeParser.LogicValContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogicComparisonExpression(PhraseForgeParser.LogicComparisonExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogicComparisonExpression(PhraseForgeParser.LogicComparisonExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogicVarExpression(PhraseForgeParser.LogicVarExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogicVarExpression(PhraseForgeParser.LogicVarExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -101,13 +173,61 @@ public class PhraseForgeBaseListener implements PhraseForgeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAsrt_num(PhraseForgeParser.Asrt_numContext ctx) { }
+	@Override public void enterQuantMultiplyDivideExpression(PhraseForgeParser.QuantMultiplyDivideExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAsrt_num(PhraseForgeParser.Asrt_numContext ctx) { }
+	@Override public void exitQuantMultiplyDivideExpression(PhraseForgeParser.QuantMultiplyDivideExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterQuantBracketsExpression(PhraseForgeParser.QuantBracketsExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitQuantBracketsExpression(PhraseForgeParser.QuantBracketsExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterQuantOnly(PhraseForgeParser.QuantOnlyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitQuantOnly(PhraseForgeParser.QuantOnlyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterQuantIdentifierOnly(PhraseForgeParser.QuantIdentifierOnlyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitQuantIdentifierOnly(PhraseForgeParser.QuantIdentifierOnlyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterQuantAdditionSubtractionExpression(PhraseForgeParser.QuantAdditionSubtractionExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitQuantAdditionSubtractionExpression(PhraseForgeParser.QuantAdditionSubtractionExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

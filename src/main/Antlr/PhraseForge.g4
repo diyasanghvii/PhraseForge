@@ -16,7 +16,7 @@ forge_asrt
 	| 'logic' FORGE_VAR (EQT asrt_bool)?
 	| 'logic' FORGE_VAR (EQT asrt_tern)?
 	| 'phrase' FORGE_VAR (EQT PHRASE_STR)?
-	| 'phrase' FORGE_VAR (EQT PHRASE_STR)?
+	| 'phrase' FORGE_VAR (EQT asrt_tern)?
 	| FORGE_VAR EQT asrt_num
 	| FORGE_VAR EQT asrt_bool
     ;
@@ -27,8 +27,7 @@ asrts
     ;
 
 asrt_bool
-    : asrt_bool op=(Logical_AND|Logical_OR) asrt_bool
-    | asrt_bool op=(EqualTo|NotEqualTo ) asrt_bool
+    : asrt_bool op=(Logical_AND|Logical_OR|EqualTo|NotEqualTo) asrt_bool
     | asrt_cmp
     | '(' asrt_bool ')'
     | PHRASE_BOOL
@@ -36,7 +35,7 @@ asrt_bool
     ;
 
 asrt_cmp
-    : asrt_num op=(GreaterThan|LesserThan|GreaterThanOrEqualTo|LesserThanOrEqualTo|EqualTo|NotEqualTo ) asrt_num
+    : asrt_num op=(GreaterThan|LesserThan|GreaterThanOrEqualTo|LesserThanOrEqualTo|EqualTo|NotEqualTo) asrt_num
     ;
 
 asrt_num
@@ -84,7 +83,7 @@ forge_loop
     : 'for' '(' forge_asrt  ';;' asrt_bool ';;'  forge_var ')' phrase_blk 'forge-for'
     ;
 
- forge_var : inc_asrt| dec_asrt|FORGE_VAR EQT asrt_num;
+forge_var : inc_asrt| dec_asrt|FORGE_VAR EQT asrt_num;
 
 dec_asrt : FORGE_VAR '--'| '--' FORGE_VAR;
 inc_asrt : FORGE_VAR '++'| '++' FORGE_VAR;

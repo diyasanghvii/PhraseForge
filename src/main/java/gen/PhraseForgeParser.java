@@ -870,6 +870,18 @@ public class PhraseForgeParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Asrt_cmpContext extends ParserRuleContext {
+		public Asrt_cmpContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_asrt_cmp; }
+	 
+		public Asrt_cmpContext() { }
+		public void copyFrom(Asrt_cmpContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class QuantComparisonExpressionContext extends Asrt_cmpContext {
 		public Token op;
 		public List<Asrt_numContext> asrt_num() {
 			return getRuleContexts(Asrt_numContext.class);
@@ -883,21 +895,18 @@ public class PhraseForgeParser extends Parser {
 		public TerminalNode LesserThanOrEqualTo() { return getToken(PhraseForgeParser.LesserThanOrEqualTo, 0); }
 		public TerminalNode EqualTo() { return getToken(PhraseForgeParser.EqualTo, 0); }
 		public TerminalNode NotEqualTo() { return getToken(PhraseForgeParser.NotEqualTo, 0); }
-		public Asrt_cmpContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_asrt_cmp; }
+		public QuantComparisonExpressionContext(Asrt_cmpContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterAsrt_cmp(this);
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).enterQuantComparisonExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitAsrt_cmp(this);
+			if ( listener instanceof PhraseForgeListener ) ((PhraseForgeListener)listener).exitQuantComparisonExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitAsrt_cmp(this);
+			if ( visitor instanceof PhraseForgeVisitor ) return ((PhraseForgeVisitor<? extends T>)visitor).visitQuantComparisonExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -907,15 +916,16 @@ public class PhraseForgeParser extends Parser {
 		enterRule(_localctx, 12, RULE_asrt_cmp);
 		int _la;
 		try {
+			_localctx = new QuantComparisonExpressionContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(126);
 			asrt_num(0);
 			setState(127);
-			((Asrt_cmpContext)_localctx).op = _input.LT(1);
+			((QuantComparisonExpressionContext)_localctx).op = _input.LT(1);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 17317308137472L) != 0)) ) {
-				((Asrt_cmpContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+				((QuantComparisonExpressionContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 			}
 			else {
 				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;

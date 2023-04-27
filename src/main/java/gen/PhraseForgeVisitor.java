@@ -91,11 +91,12 @@ public interface PhraseForgeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLogicVarExpression(PhraseForgeParser.LogicVarExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PhraseForgeParser#asrt_cmp}.
+	 * Visit a parse tree produced by the {@code quantComparisonExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_cmp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAsrt_cmp(PhraseForgeParser.Asrt_cmpContext ctx);
+	T visitQuantComparisonExpression(PhraseForgeParser.QuantComparisonExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code quantMultiplyDivideExpression}
 	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.

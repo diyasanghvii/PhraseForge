@@ -7,7 +7,6 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,11 +19,11 @@ public class Compiler {
             PhraseForgeParser parser = new PhraseForgeParser(tokens);
             ParseTree pTree = parser.forge_pgm();
             PhraseForgeCompiler compiler = new PhraseForgeCompiler();
-            //pass compiled code later
-            List<String> iCode= new ArrayList<String>();
+            compiler.visit(pTree);
+            List<String> iCode= Arrays.asList(compiler.getInterCode().split("\\n"));
             System.out.println("Compile time: No of lines in intermediate code - " + iCode.size());
             if (iCode.size() > 0) {
-                PrintWriter pw = new PrintWriter(pgmPath.replace(".prage", "pra"), StandardCharsets.UTF_8);
+                PrintWriter pw = new PrintWriter(pgmPath.replace("prage", "pra"), StandardCharsets.UTF_8);
                 for (String line : iCode) {
                     pw.println(line);
                 }

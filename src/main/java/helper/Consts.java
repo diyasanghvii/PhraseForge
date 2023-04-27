@@ -24,7 +24,22 @@ public class Consts {
     public static final String NOT_EQUAL_TO = "NOT_EQUAL_TO";
     public static final String LOGICAL_OR = "LOGICAL_OR";
     public static final String LOGICAL_AND = "LOGICAL_AND";
+
     public static final String COND_STRT = "COND_STRT";
     public static final String COND_END = "COND_END";
+    public static final String TEST_STRT = "TEST_STRT";
+    public static final String TEST_END = "TEST_END";
+    public static final String ROUTE_STRT = "ROUTE_STRT";
+    public static final String ROUTE_END = "ROUTE_END";
+    public static final String TEST_ROUTE_STRT = "TEST_ROUTE_STRT";
+    public static final String TEST_ROUTE_END = "TEST_ROUTE_END";
+    public static final String ROUTE_TEST_STRT = "ROUTE_TEST_STRT";
+    public static final String ROUTE_TEST_END = "ROUTE_TEST_END";
+
+    public static final String LOOP_STRT = "LOOP_STRT";
+    public static final String LOOP_END = "LOOP_END";
+
+    public static final String WHILE_STRT = "WHILE_STRT";
+    public static final String WHILE_END = "WHILE_END";
     
 }

@@ -144,15 +144,17 @@ public interface PhraseForgeListener extends ParseTreeListener {
 	 */
 	void exitLogicVarExpression(PhraseForgeParser.LogicVarExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseForgeParser#asrt_cmp}.
+	 * Enter a parse tree produced by the {@code quantComparisonExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_cmp}.
 	 * @param ctx the parse tree
 	 */
-	void enterAsrt_cmp(PhraseForgeParser.Asrt_cmpContext ctx);
+	void enterQuantComparisonExpression(PhraseForgeParser.QuantComparisonExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseForgeParser#asrt_cmp}.
+	 * Exit a parse tree produced by the {@code quantComparisonExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_cmp}.
 	 * @param ctx the parse tree
 	 */
-	void exitAsrt_cmp(PhraseForgeParser.Asrt_cmpContext ctx);
+	void exitQuantComparisonExpression(PhraseForgeParser.QuantComparisonExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code quantMultiplyDivideExpression}
 	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.

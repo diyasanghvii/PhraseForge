@@ -35,7 +35,7 @@ asrt_bool
     ;
 
 asrt_cmp
-    : asrt_num op=(GreaterThan|LesserThan|GreaterThanOrEqualTo|LesserThanOrEqualTo|EqualTo|NotEqualTo) asrt_num
+    : asrt_num op=(GreaterThan|LesserThan|GreaterThanOrEqualTo|LesserThanOrEqualTo|EqualTo|NotEqualTo) asrt_num  #quantComparisonExpression
     ;
 
 asrt_num

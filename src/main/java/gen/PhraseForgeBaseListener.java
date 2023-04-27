@@ -161,13 +161,13 @@ public class PhraseForgeBaseListener implements PhraseForgeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAsrt_cmp(PhraseForgeParser.Asrt_cmpContext ctx) { }
+	@Override public void enterQuantComparisonExpression(PhraseForgeParser.QuantComparisonExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAsrt_cmp(PhraseForgeParser.Asrt_cmpContext ctx) { }
+	@Override public void exitQuantComparisonExpression(PhraseForgeParser.QuantComparisonExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

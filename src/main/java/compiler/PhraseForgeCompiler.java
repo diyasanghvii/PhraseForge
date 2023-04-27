@@ -353,7 +353,211 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         iCode.insertInterOutput(Consts.COND_END);
         return null;
     }
-@Override
+
+    @Override
+    public Object visitForge_if(PhraseForgeParser.Forge_ifContext ctx) {
+
+        iCode.insertInterOutput(Consts.TEST_ROUTE_STRT);
+        iCode.insertInterOutput(Consts.TEST_STRT);
+        visit(ctx.asrt_eval());
+        visit(ctx.phrase_blk());
+        iCode.insertInterOutput(Consts.TEST_END);
+        for (int i = 0; i < ctx.else_forge_if().size(); i++) {
+            visit(ctx.else_forge_if(i));
+        }
+        if (ctx.forge_else() != null) {
+            visit(ctx.forge_else());
+        }
+        iCode.insertInterOutput(Consts.TEST_ROUTE_END);
+
+        return null;
+    }
+
+    @Override
+    public Object visitElse_forge_if(PhraseForgeParser.Else_forge_ifContext ctx) {
+        iCode.insertInterOutput(Consts.ROUTE_TEST_STRT);
+        visit(ctx.asrt_eval());
+        visit(ctx.phrase_blk());
+        iCode.insertInterOutput(Consts.ROUTE_TEST_END);
+        return null;
+    }
+
+    @Override
+    public Object visitForge_else(PhraseForgeParser.Forge_elseContext ctx) {
+        iCode.insertInterOutput(Consts.ROUTE_STRT);
+        visit(ctx.phrase_blk());
+        iCode.insertInterOutput(Consts.ROUTE_END);
+        return null;
+    }
+
+    @Override
+    public Object visitForge_while(PhraseForgeParser.Forge_whileContext ctx) {
+        iCode.insertInterOutput(Consts.WHILE_STRT);
+        visit(ctx.asrt_eval());
+        visit(ctx.phrase_blk());
+        iCode.insertInterOutput(Consts.WHILE_END);
+        return null;
+    }
+
+    @Override
+    public Object visitForge_enh(PhraseForgeParser.Forge_enhContext ctx) {
+        String idf = ctx.FORGE_VAR().getText();
+        addVar(idf);
+        visit(ctx.forgeRange(0));
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + idf + " " + Consts.ACC_REGISTER);
+        iCode.insertInterOutput(Consts.LOOP_STRT);
+        iCode.insertInterOutput(Consts.COND_STRT);
+
+        String maxRange;
+        if(ctx.forgeRange(1).FORGE_VAR() != null){
+            maxRange = ctx.forgeRange(1).FORGE_VAR().getText();
+        } else {
+            maxRange = ctx.forgeRange(1).PHRASE_NUM().getText();
+        }
+        updateIdentifierInFor(Consts.LT, idf, maxRange);
+        iCode.insertInterOutput(Consts.COND_END);
+        updateIdentifierInFor(Consts.ADDITION, ctx.FORGE_VAR().getText(), "1");
+        iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                ctx.FORGE_VAR().getText() + " " + Consts.ACC_REGISTER);
+        visit(ctx.phrase_blk());
+        iCode.insertInterOutput(Consts.LOOP_END);
+
+        return null;
+    }
+
+    @Override
+    public Object visitForgeRange(PhraseForgeParser.ForgeRangeContext ctx) {
+        String value = "0";
+        if(ctx.PHRASE_NUM() != null){
+            value = ctx.PHRASE_NUM().getText();
+        } else if (ctx.FORGE_VAR() != null){
+            value = ctx.FORGE_VAR().getText();
+        }
+
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + Consts.ACC_REGISTER + " " + value);
+        return null;
+    }
+
+    @Override
+    public Object visitForge_loop(PhraseForgeParser.Forge_loopContext ctx) {
+        visit(ctx.forge_asrt());
+        iCode.insertInterOutput(Consts.LOOP_STRT);
+        iCode.insertInterOutput(Consts.COND_STRT);
+        visit(ctx.asrt_bool());
+        iCode.insertInterOutput(Consts.COND_END);
+        visit(ctx.phrase_blk());
+        visit(ctx.forge_var());
+        iCode.insertInterOutput(Consts.LOOP_END);
+        return null;
+    }
+
+    @Override
+    public Object visitForge_var(PhraseForgeParser.Forge_varContext ctx) {
+        if (ctx.inc_asrt() != null) {
+            visit(ctx.inc_asrt());
+        } else if (ctx.dec_asrt() != null) {
+            visit(ctx.dec_asrt());
+        } else if (ctx.asrt_num() != null) {
+            visit(ctx.asrt_num());
+        }
+
+        return null;
+    }
+
+    public void updateIdentifierInFor(String operation, String idf, String constant){
+        iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                Consts.ACC_REGISTER  + " " + idf);
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + Consts.R4 + " " + Consts.ACC_REGISTER);
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + Consts.ACC_REGISTER + " " + constant);
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + Consts.R5 + " " + Consts.ACC_REGISTER);
+        iCode.insertInterOutput(operation + " " + Consts.ACC_REGISTER + " "
+                + Consts.R4 + " " + Consts.R5);
+    }
+
+    @Override
+    public Object visitDec_asrt(PhraseForgeParser.Dec_asrtContext ctx) {
+        updateIdentifierInFor(Consts.SUBTRACTION, ctx.FORGE_VAR().getText(), "1");
+        iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                ctx.FORGE_VAR().getText() + " " + Consts.ACC_REGISTER);
+        return null;
+    }
+
+    @Override
+    public Object visitInc_asrt(PhraseForgeParser.Inc_asrtContext ctx) {
+        updateIdentifierInFor(Consts.ADDITION, ctx.FORGE_VAR().getText(), "1");
+        iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                ctx.FORGE_VAR().getText() + " " + Consts.ACC_REGISTER);
+        return null;
+    }
+
+    @Override
+    public Object visitAsrt_tern(PhraseForgeParser.Asrt_ternContext ctx) {
+
+        iCode.insertInterOutput(Consts.TEST_ROUTE_STRT);
+        iCode.insertInterOutput(Consts.TEST_STRT);
+        visit(ctx.asrt_eval());
+        // block1
+        ternaryBlock(ctx, 0);
+        iCode.insertInterOutput(Consts.TEST_END);
+        iCode.insertInterOutput(Consts.ROUTE_STRT);
+        //block2
+        ternaryBlock(ctx, 1);
+        iCode.insertInterOutput(Consts.ROUTE_END);
+        iCode.insertInterOutput(Consts.TEST_ROUTE_END);
+        return null;
+    }
+
+    public void ternaryBlock(PhraseForgeParser.Asrt_ternContext ctx, int index){
+        if (ctx.asrts(index) != null){
+            iCode.insertInterOutput(Consts.STR_INSTR + " "
+                    + Consts.ACC_REGISTER + " " +ctx.asrts(index).getText());
+        } else if (ctx.PHRASE_BOOL(index) != null){
+            iCode.insertInterOutput(Consts.STR_INSTR + " "
+                    + Consts.ACC_REGISTER + " " +ctx.PHRASE_BOOL(index).getText());
+        } else if (ctx.PHRASE_STR(index) != null){
+            iCode.insertInterOutput(Consts.STR_INSTR + " "
+                    + Consts.ACC_REGISTER + " " +ctx.PHRASE_STR(index).getText());
+        }
+    }
+
+    @Override
+    public Object visitEcho_forge(PhraseForgeParser.Echo_forgeContext ctx) {
+
+        if (ctx.PHRASE_STR() != null) {
+            if (ctx.getText().contains(",") && ctx.FORGE_VAR() != null) {
+                visit(ctx.PHRASE_STR(0));
+                iCode.insertInterOutput(Consts.ECHO_INSTR + " " + ctx.PHRASE_STR(0).getText());
+            } else if (ctx.PHRASE_STR(0) != null) {
+                iCode.insertInterOutput(Consts.ECHO_INSTR + " " + ctx.PHRASE_STR(0).getText());
+            }
+        }
+
+        if (ctx.FORGE_VAR() != null) {
+            if (existVar(ctx.FORGE_VAR().getText())) {
+                iCode.insertInterOutput(Consts.ECHO_INSTR + " " + ctx.FORGE_VAR().getText());
+            } else {
+                varDoesNotExist(ctx.FORGE_VAR().getText());
+            }
+        } else if (ctx.PHRASE_NUM() != null) {
+            iCode.insertInterOutput(Consts.ECHO_INSTR + " " + ctx.PHRASE_NUM().getText());
+        } else if (ctx.PHRASE_BOOL() != null) {
+            iCode.insertInterOutput(Consts.ECHO_INSTR + " " + ctx.PHRASE_BOOL().getText());
+        } else if (ctx.asrt_num() != null) {
+            visit(ctx.asrt_num());
+            iCode.insertInterOutput(Consts.ECHO_INSTR + " " + Consts.ACC_REGISTER);
+        } else if (ctx.asrt_bool() != null) {
+            visit(ctx.asrt_bool());
+            iCode.insertInterOutput(Consts.ECHO_INSTR + " " + Consts.ACC_REGISTER);
+        }
+
+        return null;
+    }
+    @Override
     public Object visit(ParseTree tree) {
         return super.visit(tree);
     }

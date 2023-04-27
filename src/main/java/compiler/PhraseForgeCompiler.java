@@ -6,116 +6,405 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
+import helper.Consts;
 import java.util.ArrayList;
 
 public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
 
-    private ArrayList<String> variableList = new ArrayList<>();
+    private ArrayList<String> var = new ArrayList<>();
     private Intercode iCode = new Intercode();
 
-    public String getOutput() {
+    public String getInterCode() {
         return iCode.getiCode();
     }
 
-    public void addVariableToList(String namedVariable) {
-        variableList.add(namedVariable);
+    public void addVar(String newVar) {
+        var.add(newVar);
     }
 
-    public boolean doesVariableExist(String namedVariable) {
-        return variableList.contains(namedVariable);
+    public boolean existVar(String newVar) {
+        return var.contains(newVar);
     }
 
-    public void missingVariableError(String identifier) {
-        System.err.println("Compiletime error: Variable " + identifier + " not defined. Did you forget to declare variable " + identifier + "?");
+    public void varDoesNotExist(String idf) {
+        System.err.println("Compiletime error: Variable " + idf + " not defined. Please define " + idf + "first.");
         System.exit(1);
     }
 
     @Override
     public Object visitForge_pgm(PhraseForgeParser.Forge_pgmContext ctx) {
-        // Code for pf_launch
-        iCode.insertInterOutput("pf_launch");
-
-        // Visit phrase_blk
-        visit(ctx.phrase_blk());
-
-        // Code for pf_abort
-        iCode.insertInterOutput("pf_abort");
-
-        return null;
+        return super.visitChildren(ctx);
     }
 
     @Override
     public Object visitPhrase_blk(PhraseForgeParser.Phrase_blkContext ctx) {
-        // Code for opening bracket
-        iCode.insertInterOutput("{");
+        return super.visitChildren(ctx);
+    }
 
-        // Visit forge_cmd+
-        for (PhraseForgeParser.Forge_cmdContext forgeCmdContext : ctx.forge_cmd()) {
-            visit(forgeCmdContext);
+    @Override
+    public Object visitForge_cmd(PhraseForgeParser.Forge_cmdContext ctx) {
+        return super.visitChildren(ctx);
+    }
+
+    @Override
+    public Object visitQuantAssignment(PhraseForgeParser.QuantAssignmentContext ctx) {
+        String idf = ctx.FORGE_VAR().getText();
+
+        if (ctx.getText().contains("quant")) {
+            addVar(idf);
+        } else if (!existVar(idf)) {
+            varDoesNotExist(idf);
         }
 
-        // Code for closing bracket
-        iCode.insertInterOutput("}");
+        if (ctx.EQT() != null) {
+            if (ctx.getText().contains("??") && ctx.getText().contains("::")) {
+                visit(ctx.asrt_tern());
+            } else {
+                visit(ctx.asrt_num());
+            }
+        } else {
+            iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                    Consts.ACC_REGISTER + " " + Consts.DEFAULT_QUANT);
+        }
+
+        iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                idf + " " + Consts.ACC_REGISTER);
 
         return null;
     }
 
     @Override
-    public Object visitForge_if(PhraseForgeParser.Forge_ifContext ctx) {
-        // Code for 'test'
-        iCode.insertInterOutput("test");
+    public Object visitLogicAssignment(PhraseForgeParser.LogicAssignmentContext ctx) {
+        String idf = ctx.FORGE_VAR().getText();
 
-        // Visit asrt_eval
-        visit(ctx.asrt_eval());
-
-        // Visit phrase_blk
-        visit(ctx.phrase_blk());
-
-        // Visit else_forge_if*
-        for (PhraseForgeParser.Else_forge_ifContext elseForgeIfContext : ctx.else_forge_if()) {
-            visit(elseForgeIfContext);
+        if (ctx.getText().contains("logic")) {
+            addVar(idf);
+        } else if (!existVar(idf)) {
+            varDoesNotExist(idf);
         }
 
-        // Visit forge_else?
-        if (ctx.forge_else() != null) {
-            visit(ctx.forge_else());
+        if (ctx.EQT() != null) {
+            if (ctx.getText().contains("??") && ctx.getText().contains("::")) {
+                visit(ctx.asrt_tern());
+            } else {
+                visit(ctx.asrt_bool());
+            }
+        } else {
+            iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                    Consts.ACC_REGISTER + " " + Consts.DEFAULT_LOGIC);
         }
 
-        // Code for 'forge-test'
-        iCode.insertInterOutput("forge-test");
+        iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                idf + " " + Consts.ACC_REGISTER);
 
         return null;
     }
 
     @Override
-    public Object visitElse_forge_if(PhraseForgeParser.Else_forge_ifContext ctx) {
-        // Code for 'routeTest'
-        iCode.insertInterOutput("routeTest");
+    public Object visitPhraseAssignment(PhraseForgeParser.PhraseAssignmentContext ctx) {
+        String idf = ctx.FORGE_VAR().getText();
 
-        // Visit asrt_eval
-        visit(ctx.asrt_eval());
+        if (ctx.getText().contains("phrase")) {
+            addVar(idf);
+        } else if (!existVar(idf)) {
+            varDoesNotExist(idf);
+        }
 
-        // Visit phrase_blk
-        visit(ctx.phrase_blk());
+        if (ctx.EQT() != null) {
+            if (ctx.getText().contains("??") && ctx.getText().contains("::")) {
+                visit(ctx.asrt_tern());
+            } else {
+                iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                        Consts.ACC_REGISTER + " " + ctx.PHRASE_STR().getText());
+            }
+        } else {
+            iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                    Consts.ACC_REGISTER + " " + Consts.DEFAULT_PHRASE);
+        }
 
-        // Code for 'forge-routeTest'
-        iCode.insertInterOutput("forge-routeTest");
+        iCode.insertInterOutput(Consts.STR_INSTR + " " +
+                idf + " " + Consts.ACC_REGISTER);
 
         return null;
     }
 
     @Override
-    public Object visitForge_else(PhraseForgeParser.Forge_elseContext ctx) {
-        // Code for 'route'
-        iCode.insertInterOutput("route");
+    public Object visitAsrts(PhraseForgeParser.AsrtsContext ctx) {
+        visit(ctx.asrt_num());
+        visit(ctx.asrt_bool());
+        return null;
+    }
 
-        // Visit phrase_blk
-        visit(ctx.phrase_blk());
+    @Override
+    public Object visitLogicExpressionInBrackets(PhraseForgeParser.LogicExpressionInBracketsContext ctx) {
+        visit(ctx.asrt_bool());
+        return null;
+    }
 
-        // Code for 'forge-route'
-        iCode.insertInterOutput("forge-route");
+    @Override
+    public Object visitLogicVarExpression(PhraseForgeParser.LogicVarExpressionContext ctx) {
+
+        String idf = ctx.FORGE_VAR().getText();
+
+        if (existVar(idf)) {
+            iCode.insertInterOutput(Consts.STR_INSTR + " " + Consts.ACC_REGISTER + " " + idf);
+        } else {
+            varDoesNotExist(idf);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitLogicVal(PhraseForgeParser.LogicValContext ctx) {
+        iCode.insertInterOutput(Consts.STR_INSTR + " " + Consts.ACC_REGISTER + " " + ctx.PHRASE_BOOL().getText());
+        return null;
+    }
+
+    @Override
+    public Object visitLogicLogicalExpression(PhraseForgeParser.LogicLogicalExpressionContext ctx) {
+
+        visit(ctx.asrt_bool(0));
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + Consts.R2 + " "
+                + Consts.ACC_REGISTER);
+        visit(ctx.asrt_bool(1));
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + Consts.R3 + " "
+                + Consts.ACC_REGISTER);
+
+        switch (ctx.op.getType()) {
+            case PhraseForgeParser.Logical_AND -> iCode.insertInterOutput(Consts.LOGICAL_AND + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R2 + " "
+                    + Consts.R3);
+            case PhraseForgeParser.Logical_OR -> iCode.insertInterOutput(Consts.LOGICAL_OR + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R2 + " "
+                    + Consts.R3);
+            case PhraseForgeParser.EqualTo -> iCode.insertInterOutput(Consts.EQUAL_TO + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R2 + " "
+                    + Consts.R3);
+            case PhraseForgeParser.NotEqualTo -> iCode.insertInterOutput(Consts.NOT_EQUAL_TO + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R2 + " "
+                    + Consts.R3);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitLogicComparisonExpression(PhraseForgeParser.LogicComparisonExpressionContext ctx) {
+        visit(ctx.asrt_cmp());
+        return null;
+    }
+
+    @Override
+    public Object visitQuantComparisonExpression(PhraseForgeParser.QuantComparisonExpressionContext ctx) {
+        visit(ctx.asrt_num(0));
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + Consts.R3+ " "
+                + Consts.ACC_REGISTER);
+        visit(ctx.asrt_num(1));
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + Consts.R4 + " "
+                + Consts.ACC_REGISTER);
+
+        switch (ctx.op.getType()) {
+            case PhraseForgeParser.GreaterThan -> iCode.insertInterOutput(Consts.GT + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R3 + " "
+                    + Consts.R4);
+            case PhraseForgeParser.LesserThan -> iCode.insertInterOutput(Consts.LT + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R3 + " "
+                    + Consts.R4);
+            case PhraseForgeParser.GreaterThanOrEqualTo -> iCode.insertInterOutput(Consts.GTE + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R3 + " "
+                    + Consts.R4);
+            case PhraseForgeParser.LesserThanOrEqualTo -> iCode.insertInterOutput(Consts.LTE + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R3 + " "
+                    + Consts.R4);
+            case PhraseForgeParser.EqualTo -> iCode.insertInterOutput(Consts.EQUAL_TO + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R3 + " "
+                    + Consts.R4);
+            case PhraseForgeParser.NotEqualTo -> iCode.insertInterOutput(Consts.NOT_EQUAL_TO + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R3 + " "
+                    + Consts.R4);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitQuantMultiplyDivideExpression(PhraseForgeParser.QuantMultiplyDivideExpressionContext ctx) {
+
+        int tree1 = 0;
+        int tree2 = 1;
+
+        String reg1 = Consts.R2;
+        String reg2 = Consts.R3;
+
+        if(ctx.asrt_num(1).getChildCount() > ctx.asrt_num(0).getChildCount()) {
+            tree1 = 1; tree2 = 0;
+        }
+
+        if(!((ctx.asrt_num(1).getChildCount() > 2) && (ctx.asrt_num(0).getChildCount() > 2))) {
+            reg1 = Consts.R3;
+            reg2 = Consts.R4;
+        }
+
+        visit(ctx.asrt_num(tree1));
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + reg1 + " " + Consts.ACC_REGISTER);
+        visit(ctx.asrt_num(tree2));
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + reg2 + " " + Consts.ACC_REGISTER);
+
+        switch (ctx.op.getType()) {
+            case PhraseForgeParser.Multiplication -> iCode.insertInterOutput(Consts.MULTIPLICATION + " "
+                    + Consts.ACC_REGISTER + " " + reg1 + " " + reg2);
+            case PhraseForgeParser.Division -> iCode.insertInterOutput(Consts.DIVISION + " "
+                    + Consts.ACC_REGISTER + " " + reg1 + " " + reg2);
+        }
 
         return null;
+    }
+
+    @Override
+    public Object visitQuantAdditionSubtractionExpression(PhraseForgeParser.QuantAdditionSubtractionExpressionContext ctx) {
+
+        int tree1 = 0;
+        int tree2 = 1;
+
+        String reg1 = Consts.R2;
+        String reg2 = Consts.R3;
+
+        if(ctx.asrt_num(1).getChildCount() > ctx.asrt_num(0).getChildCount()) {
+            tree1 = 1; tree2 = 0;
+        }
+
+        if(!((ctx.asrt_num(1).getChildCount() > 2) && (ctx.asrt_num(0).getChildCount() > 2))) {
+            reg1 = Consts.R3;
+            reg2 = Consts.R4;
+        }
+
+        visit(ctx.asrt_num(tree1));
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + reg1 + " " + Consts.ACC_REGISTER);
+        visit(ctx.asrt_num(tree2));
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + reg2 + " " + Consts.ACC_REGISTER);
+
+        switch (ctx.op.getType()) {
+            case PhraseForgeParser.Addition -> iCode.insertInterOutput(Consts.ADDITION + " "
+                    + Consts.ACC_REGISTER + " " + reg1 + " " + reg2);
+            case PhraseForgeParser.Subtraction -> iCode.insertInterOutput(Consts.SUBTRACTION + " "
+                    + Consts.ACC_REGISTER + " " + reg1 + " " + reg2);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitQuantIdentifierOnly(PhraseForgeParser.QuantIdentifierOnlyContext ctx) {
+
+        String idf = ctx.FORGE_VAR().getText();
+
+        if (existVar(idf)) {
+            iCode.insertInterOutput(Consts.STR_INSTR + " " + Consts.ACC_REGISTER + " " + idf);
+            if (ctx.Subtraction() != null) {
+                iCode.insertInterOutput(Consts.U_MINUS + " " + Consts.ACC_REGISTER);
+            }
+        } else {
+            varDoesNotExist(idf);
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visitQuantBracketsExpression(PhraseForgeParser.QuantBracketsExpressionContext ctx) {
+        visit(ctx.asrt_num());
+        return null;
+    }
+
+    @Override
+    public Object visitQuantOnly(PhraseForgeParser.QuantOnlyContext ctx) {
+
+        if (ctx.PHRASE_NUM() != null && ctx.PHRASE_NUM().getText() != null) {
+            String value = ctx.PHRASE_NUM().getText();
+            int intVal = Integer.parseInt(value);
+            if (ctx.Subtraction() != null) {
+                intVal *= -1;
+            }
+            iCode.insertInterOutput(Consts.STR_INSTR + " " + Consts.ACC_REGISTER + " " + intVal);
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visitAsrt_eval(PhraseForgeParser.Asrt_evalContext ctx) {
+        iCode.insertInterOutput(Consts.COND_STRT);
+        visit(ctx.asrt_bool());
+        iCode.insertInterOutput(Consts.COND_END);
+        return null;
+    }
+@Override
+    public Object visit(ParseTree tree) {
+        return super.visit(tree);
+    }
+
+    @Override
+    public Object visitChildren(RuleNode node) {
+        return super.visitChildren(node);
+    }
+
+    @Override
+    public Object visitTerminal(TerminalNode node) {
+        return super.visitTerminal(node);
+    }
+
+    @Override
+    public Object visitErrorNode(ErrorNode node) {
+        return super.visitErrorNode(node);
+    }
+
+    @Override
+    protected Object defaultResult() {
+        return super.defaultResult();
+    }
+
+    @Override
+    protected Object aggregateResult(Object aggregate, Object nextResult) {
+        return super.aggregateResult(aggregate, nextResult);
+    }
+
+    @Override
+    protected boolean shouldVisitNextChild(RuleNode node, Object currentResult) {
+        return super.shouldVisitNextChild(node, currentResult);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

@@ -5,13 +5,14 @@ public class Consts {
     public static final String DEFAULT_LOGIC = "OFF";
     public static final String DEFAULT_PHRASE = "@@";
     public static final String U_MINUS = "UNARY";
+    public static final String U_NOT = "LOGICAL_NOT";
     public static final String ACC_REGISTER = "ACC";
     public static final String R2 = "B";
     public static final String R3 = "C";
     public static final String R4 = "D";
     public static final String R5 = "E";
     public static final String STR_INSTR = "LOAD";
-    public static final String ECHO_INSTR = "PRINT";
+    public static final String ECHO_INSTR = "ECHO";
     public static final String ADDITION = "ADD";
     public static final String SUBTRACTION = "SUB";
     public static final String MULTIPLICATION = "MUL";

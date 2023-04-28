@@ -1,5 +1,6 @@
 package integrator;
 import compiler.Compiler;
+import helper.Rmain;
 public class Integrator {
     public static void main(String[] args) {
 
@@ -13,6 +14,9 @@ public class Integrator {
 
                 System.out.println("Compiled Successfully!");
                 System.out.println("Intermediate Code saved at " + filePath + "\n");
+
+                Rmain runtime = new Rmain();
+                runtime.execute(filePath);
             }
         } catch (Exception e){
             e.printStackTrace();

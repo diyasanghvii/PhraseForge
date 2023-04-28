@@ -1,0 +1,57 @@
+start
+{
+    %^% Program with all operations%^%
+
+    reveal(@hello@)
+    quant a -> 233
+    quant b -> 234
+    quant c -> (a $> b) ?? a :: b
+    reveal(@Ternary_operation@, c)
+
+    quant addition -> a + b
+    reveal(@Adding_two_numbers@, addition)
+
+    quant subtraction -> a - b
+    reveal(@Subtracting_two_numbers@, subtraction)
+
+    quant multiplication -> a * b
+    reveal(@multiplying_two_numbers@, multiplication)
+
+    quant division -> b/a
+    reveal(@diving_two_numbers@, division)
+
+    quant d -> 10
+    quant e -> a
+
+    reveal(@valueOf_d@, d)
+    reveal(@valueOf_e@, e)
+    test(d $== e)
+    {
+        reveal(@d_equal_to_e@)
+    }
+    route
+    {
+        reveal(@d_not_equal_to_e@)
+    }
+    forge-route
+    forge-test
+
+    reveal(@revealing_using_for@)
+
+    for i in range (0;; 10)
+    {
+        reveal(i)
+    }
+    forge-for
+
+    reveal(@revealing_using_while@)
+    quant j -> 0
+
+    while(j < 10)
+    {
+        reveal(j)
+        j -> j + 1
+    }
+    forge-while
+}
+forge

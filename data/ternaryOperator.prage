@@ -1,0 +1,8 @@
+pf_launch
+{
+    quant a -> 1234567
+    quant b -> 2334551
+    quant c -> (a $> b) ?? a :: b
+    reveal(c)
+}
+pf_abort

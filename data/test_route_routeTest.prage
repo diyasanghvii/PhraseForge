@@ -1,0 +1,22 @@
+pf_launch
+{
+    quant a -> 11
+    quant b -> 22
+    quant c -> 33
+
+    test((a $> b) and (a $> c))
+    {
+        reveal(a)
+    }
+    routeTest ((b $> a) $& (b $> c))
+    {
+        reveal(b)
+    }
+    forge-routeTest
+    route
+    {
+        reveal(c)
+    }
+    forge-route
+    forge-test
+}pf_abort

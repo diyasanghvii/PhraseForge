@@ -1,0 +1,28 @@
+pf_launch
+{
+    %^% to check if a numberber is prime or not %^%
+    quant number -> 17
+    quant p -> 0
+
+    for(quant i->2;; i<number;; i++)
+    {
+        test((number-(number/i)*i) $== 0)
+        {
+            p -> p + 1
+        }
+        forge-test
+
+    }
+    forge-for
+    test (p $== 0)
+    {
+        reveal(@prime@)
+    }
+    route
+    {
+        reveal(@not_prime@)
+    }
+    forge-route
+    forge-test
+}
+pf_abort

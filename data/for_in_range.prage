@@ -1,0 +1,10 @@
+pf_launch
+{
+    %^% program to show for in range loop %^%
+    for i in the range (1 ;; 6)
+    {
+        reveal(i)
+    }
+    forge-for
+}
+pf_abort

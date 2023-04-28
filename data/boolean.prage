@@ -1,0 +1,29 @@
+pf_launch
+{
+    quant p -> 10
+    quant f -> 20
+    quant h -> f - p
+    quant k -> p
+
+    test(h $== k)
+    {
+        reveal(@h_equalTo_k@)
+    }
+    routeTest(h $!= k)
+    {
+        reveal(@h_notEqualTo_k@)
+    }
+    forge-routeTest
+    forge-test
+
+    logic t -> on
+    logic f -> off
+
+    test(t $| f)
+    {
+        reveal(@tOrf_is_true@)
+    }
+    forge-test
+
+}
+pf_abort

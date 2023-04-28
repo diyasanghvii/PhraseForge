@@ -1,0 +1,11 @@
+pf_launch{
+    quant fact -> 1
+    quant number -> 6
+    while( number $> 0){
+        fact -> fact * number
+        number -> number - 1
+    }
+    forge-while
+    reveal(@Factorial of @,number,@is@,fact)
+}
+pf_abort

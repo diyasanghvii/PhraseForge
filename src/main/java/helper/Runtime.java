@@ -45,6 +45,115 @@ public class Runtime {
         return PhraseForgePC;
     }
 
+    private void exeArithmeticInstr(String[] instr) throws Exception {
+
+        Types left = getDataValue(instr[2]);
+        Types right = getDataValue(instr[3]);
+        String leftDatatype = left != null ? left.getDataType() : null;
+        String rightDatatype = right != null ? right.getDataType() : null;
+
+        if (!leftDatatype.equals(rightDatatype)) {
+            throw new Exception("Data mismatch");
+        } else if (!leftDatatype.equalsIgnoreCase("quant")) {
+            throw new Exception("Arithmetic exception Can't be performed on logic or phrase type");
+        } else {
+            int leftOperand = left.dataAsInteger();
+            int rightOperand = right.dataAsInteger();
+
+            switch (instr[0]) {
+                case ADDITION -> setValue(instr[1], new Types(leftOperand + rightOperand));
+                case SUBTRACTION -> setValue(instr[1], new Types(leftOperand - rightOperand));
+                case MULTIPLICATION -> setValue(instr[1], new Types(leftOperand * rightOperand));
+                case DIVISION -> setValue(instr[1], new Types(leftOperand / rightOperand));
+            }
+        }
+    }
+
+    private void exeComparisonInstr(String[] instr) throws Exception {
+
+        Types left = getDataValue(instr[2]);
+        Types right = getDataValue(instr[3]);
+        String leftDatatype = left != null ? left.getDataType() : null;
+        String rightDatatype = right != null ? right.getDataType() : null;
+
+        if (!leftDatatype.equals(rightDatatype)) {
+            throw new Exception("Data mismatch");
+        } else if (!leftDatatype.equalsIgnoreCase("quant")) {
+            String leftOperand = getValue(instr[2]).toString();
+            String rightOperand = getValue(instr[3]).toString();
+            switch (instr[0]) {
+                case EQUAL_TO -> setValue(instr[1], new Types((leftOperand.equals(rightOperand))?"on":"off"));
+                case NOT_EQUAL_TO -> setValue(instr[1], new Types((leftOperand.equals(rightOperand))?"off":"on"));
+                default -> throw new Exception("Expression Type Error!");
+            }
+        } else {
+            int leftOperand = getValue(instr[2]).dataAsInteger();
+            int rightOperand = getValue(instr[3]).dataAsInteger();
+
+            switch (instr[0]) {
+                case GT -> setValue(instr[1], new Types((leftOperand > rightOperand)?"on":"off"));
+                case GTE -> setValue(instr[1], new Types((leftOperand >= rightOperand)?"on":"off"));
+                case LT -> setValue(instr[1], new Types((leftOperand < rightOperand)?"on":"off"));
+                case LTE -> setValue(instr[1], new Types((leftOperand <= rightOperand)?"on":"off"));
+                case EQUAL_TO -> setValue(instr[1], new Types((leftOperand == rightOperand)?"on":"off"));
+                case NOT_EQUAL_TO -> setValue(instr[1], new Types((leftOperand != rightOperand)?"on":"off"));
+            }
+        }
+    }
+
+    private int executionBlock(int PhraseForgePC, String stopCondition, boolean skipLastConditionCheck) throws Exception {
+
+        while (PhraseForgePC >= 0) {
+            String instr = iCode.get(PhraseForgePC);
+            if (!instr.equals(stopCondition)) {
+                if (!skipLastConditionCheck) {
+                    PhraseForgePC = exeInstrHandler(instr, PhraseForgePC);
+                }
+                PhraseForgePC = PhraseForgePC + 1;
+            } else {
+                break;
+            }
+        }
+        return PhraseForgePC;
+    }
+
+    private int exeTest(int PhraseForgePC) throws Exception {
+
+        PhraseForgePC = executionBlock(PhraseForgePC, COND_END, false);
+        if (getValue(ACC_REGISTER).dataAsBoolean()) {
+            PhraseForgePC = executionBlock(PhraseForgePC, TEST_END, false);
+            PhraseForgePC = executionBlock(PhraseForgePC, TEST_ROUTE_END, true);
+        } else {
+            PhraseForgePC = executionBlock(PhraseForgePC, TEST_END, true);
+        }
+        return PhraseForgePC;
+    }
+
+    private int exeRoute(int PhraseForgePC) throws Exception {
+        PhraseForgePC = executionBlock(PhraseForgePC, ROUTE_END, false);
+        return PhraseForgePC;
+    }
+
+
+    private int exeRouteTest(int PhraseForgePC) throws Exception {
+        PhraseForgePC = executionBlock(PhraseForgePC, COND_END, false);
+        if (getValue(ACC_REGISTER).dataAsBoolean()) {
+            PhraseForgePC = executionBlock(PhraseForgePC, ROUTE_TEST_END, false);
+            PhraseForgePC = executionBlock(PhraseForgePC, TEST_ROUTE_END, true);
+        } else {
+            PhraseForgePC = executionBlock(PhraseForgePC, ROUTE_TEST_END, true);
+        }
+        return PhraseForgePC;
+    }
+
+    private void exeStrInstr(String[] instr) {
+        if (instr[1].equals(ACC_REGISTER)) {
+            setValue(ACC_REGISTER, getDataValue(instr[2]));
+        } else {
+            setValue(instr[1], getValue(instr[2]));
+        }
+    }
+
     private void exeEchoInstr(String[] instr) {
         Types printData = getDataValue(instr[1]);
 

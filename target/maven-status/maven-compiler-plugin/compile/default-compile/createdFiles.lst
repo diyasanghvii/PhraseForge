@@ -35,6 +35,7 @@ gen\PhraseForgeParser$QuantOnlyContext.class
 gen\PhraseForgeParser$Asrt_cmpContext.class
 gen\PhraseForgeParser$Forge_pgmContext.class
 gen\PhraseForgeListener.class
+gen\PhraseForgeParser$LogicNotContext.class
 gen\PhraseForgeParser$QuantMultiplyDivideExpressionContext.class
 gen\PhraseForgeParser$Else_forge_ifContext.class
 gen\PhraseForgeParser$Echo_forgeContext.class

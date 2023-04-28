@@ -41,6 +41,7 @@ public class Runtime {
             case LOOP_STRT -> PhraseForgePC = exeLoop(++PhraseForgePC);
             case U_MINUS -> exeUMinusInstr(PFinstr);
             case LOGICAL_OR, LOGICAL_AND -> exeLogicInstr(PFinstr);
+            case U_NOT -> exeUNotInstr(PFinstr);
         }
         return PhraseForgePC;
     }
@@ -261,6 +262,16 @@ public class Runtime {
         String operandDatatype = operand.getDataType();
         if (operandDatatype.equalsIgnoreCase("quant")) {
             setValue(instr[1], new Types(-1 * operand.dataAsInteger()));
+        } else {
+            throw new Exception("Incompatible datatype");
+        }
+    }
+
+    private void exeUNotInstr(String[] instr) throws Exception {
+        Types operand = getDataValue(instr[2]);
+        String operandDatatype = operand.getDataType();
+        if (operandDatatype.equalsIgnoreCase("logic")) {
+            setValue(instr[1], new Types((String.valueOf(operand).equals("off"))?"on":"off"));
         } else {
             throw new Exception("Incompatible datatype");
         }

@@ -200,6 +200,20 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
     }
 
     @Override
+    public Object visitLogicNot(PhraseForgeParser.LogicNotContext ctx){
+        visit(ctx.asrt_bool(0));
+        iCode.insertInterOutput(Consts.STR_INSTR + " "
+                + Consts.R2 + " "
+                + Consts.ACC_REGISTER);
+        switch(ctx.op.getType()) {
+            case PhraseForgeParser.Logical_NOT -> iCode.insertInterOutput(Consts.U_NOT + " "
+                    + Consts.ACC_REGISTER + " "
+                    + Consts.R2);
+        }
+        return null;
+    }
+
+    @Override
     public Object visitQuantComparisonExpression(PhraseForgeParser.QuantComparisonExpressionContext ctx) {
         visit(ctx.asrt_num(0));
         iCode.insertInterOutput(Consts.STR_INSTR + " "

@@ -28,6 +28,7 @@ asrts
 
 asrt_bool
     : asrt_bool op=(Logical_AND|Logical_OR|EqualTo|NotEqualTo) asrt_bool #logicLogicalExpression
+    | op=Logical_NOT asrt_bool #logicNot
     | asrt_cmp # logicComparisonExpression
     | '(' asrt_bool ')' # logicExpressionInBrackets
     | PHRASE_BOOL       # logicVal
@@ -111,6 +112,7 @@ Multiplication      : '*';
 Division            : '/';
 Logical_AND         : '$&';
 Logical_OR          : '$|';
+Logical_NOT         : '$!';
 LesserThan          : '$<';
 GreaterThan         : '$>';
 LesserThanOrEqualTo : '$<=';

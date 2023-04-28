@@ -1,0 +1,17 @@
+pf_launch{
+    quant term1 -> 0
+    quant term2 -> 1
+    quant i
+    quant nextterm
+    quant x -> 6
+
+    for (i-> 1 ;; i $<=x ;; i++){
+        reveal(term1)
+        nextterm -> term1 + term2
+        term1 -> term2
+        term2 -> nextterm
+    }
+    forge-for
+
+}
+pf_abort

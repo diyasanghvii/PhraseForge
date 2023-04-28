@@ -1,4 +1,5 @@
-package gen;// Generated from C:/Users/dsanghv3/IdeaProjects/SER502-Spring2023-Team13/src/main/Antlr\PhraseForge.g4 by ANTLR 4.12.0
+// Generated from C:/Users/dsanghv3/IdeaProjects/SER502-Spring2023-Team13/src/main/Antlr\PhraseForge.g4 by ANTLR 4.12.0
+package gen;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -37,15 +38,41 @@ public interface PhraseForgeListener extends ParseTreeListener {
 	 */
 	void exitForge_cmd(PhraseForgeParser.Forge_cmdContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseForgeParser#forge_asrt}.
+	 * Enter a parse tree produced by the {@code quantAssignment}
+	 * labeled alternative in {@link PhraseForgeParser#forge_asrt}.
 	 * @param ctx the parse tree
 	 */
-	void enterForge_asrt(PhraseForgeParser.Forge_asrtContext ctx);
+	void enterQuantAssignment(PhraseForgeParser.QuantAssignmentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseForgeParser#forge_asrt}.
+	 * Exit a parse tree produced by the {@code quantAssignment}
+	 * labeled alternative in {@link PhraseForgeParser#forge_asrt}.
 	 * @param ctx the parse tree
 	 */
-	void exitForge_asrt(PhraseForgeParser.Forge_asrtContext ctx);
+	void exitQuantAssignment(PhraseForgeParser.QuantAssignmentContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code logicAssignment}
+	 * labeled alternative in {@link PhraseForgeParser#forge_asrt}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogicAssignment(PhraseForgeParser.LogicAssignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code logicAssignment}
+	 * labeled alternative in {@link PhraseForgeParser#forge_asrt}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogicAssignment(PhraseForgeParser.LogicAssignmentContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code phraseAssignment}
+	 * labeled alternative in {@link PhraseForgeParser#forge_asrt}.
+	 * @param ctx the parse tree
+	 */
+	void enterPhraseAssignment(PhraseForgeParser.PhraseAssignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code phraseAssignment}
+	 * labeled alternative in {@link PhraseForgeParser#forge_asrt}.
+	 * @param ctx the parse tree
+	 */
+	void exitPhraseAssignment(PhraseForgeParser.PhraseAssignmentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PhraseForgeParser#asrts}.
 	 * @param ctx the parse tree
@@ -57,35 +84,137 @@ public interface PhraseForgeListener extends ParseTreeListener {
 	 */
 	void exitAsrts(PhraseForgeParser.AsrtsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseForgeParser#asrt_bool}.
+	 * Enter a parse tree produced by the {@code logicExpressionInBrackets}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
 	 * @param ctx the parse tree
 	 */
-	void enterAsrt_bool(PhraseForgeParser.Asrt_boolContext ctx);
+	void enterLogicExpressionInBrackets(PhraseForgeParser.LogicExpressionInBracketsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseForgeParser#asrt_bool}.
+	 * Exit a parse tree produced by the {@code logicExpressionInBrackets}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
 	 * @param ctx the parse tree
 	 */
-	void exitAsrt_bool(PhraseForgeParser.Asrt_boolContext ctx);
+	void exitLogicExpressionInBrackets(PhraseForgeParser.LogicExpressionInBracketsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseForgeParser#asrt_cmp}.
+	 * Enter a parse tree produced by the {@code logicLogicalExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
 	 * @param ctx the parse tree
 	 */
-	void enterAsrt_cmp(PhraseForgeParser.Asrt_cmpContext ctx);
+	void enterLogicLogicalExpression(PhraseForgeParser.LogicLogicalExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseForgeParser#asrt_cmp}.
+	 * Exit a parse tree produced by the {@code logicLogicalExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
 	 * @param ctx the parse tree
 	 */
-	void exitAsrt_cmp(PhraseForgeParser.Asrt_cmpContext ctx);
+	void exitLogicLogicalExpression(PhraseForgeParser.LogicLogicalExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PhraseForgeParser#asrt_num}.
+	 * Enter a parse tree produced by the {@code logicVal}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
 	 * @param ctx the parse tree
 	 */
-	void enterAsrt_num(PhraseForgeParser.Asrt_numContext ctx);
+	void enterLogicVal(PhraseForgeParser.LogicValContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PhraseForgeParser#asrt_num}.
+	 * Exit a parse tree produced by the {@code logicVal}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
 	 * @param ctx the parse tree
 	 */
-	void exitAsrt_num(PhraseForgeParser.Asrt_numContext ctx);
+	void exitLogicVal(PhraseForgeParser.LogicValContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code logicComparisonExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogicComparisonExpression(PhraseForgeParser.LogicComparisonExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code logicComparisonExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogicComparisonExpression(PhraseForgeParser.LogicComparisonExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code logicVarExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogicVarExpression(PhraseForgeParser.LogicVarExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code logicVarExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogicVarExpression(PhraseForgeParser.LogicVarExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code quantComparisonExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_cmp}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuantComparisonExpression(PhraseForgeParser.QuantComparisonExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code quantComparisonExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_cmp}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuantComparisonExpression(PhraseForgeParser.QuantComparisonExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code quantMultiplyDivideExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuantMultiplyDivideExpression(PhraseForgeParser.QuantMultiplyDivideExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code quantMultiplyDivideExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuantMultiplyDivideExpression(PhraseForgeParser.QuantMultiplyDivideExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code quantBracketsExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuantBracketsExpression(PhraseForgeParser.QuantBracketsExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code quantBracketsExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuantBracketsExpression(PhraseForgeParser.QuantBracketsExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code quantOnly}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuantOnly(PhraseForgeParser.QuantOnlyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code quantOnly}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuantOnly(PhraseForgeParser.QuantOnlyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code quantIdentifierOnly}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuantIdentifierOnly(PhraseForgeParser.QuantIdentifierOnlyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code quantIdentifierOnly}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuantIdentifierOnly(PhraseForgeParser.QuantIdentifierOnlyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code quantAdditionSubtractionExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuantAdditionSubtractionExpression(PhraseForgeParser.QuantAdditionSubtractionExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code quantAdditionSubtractionExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuantAdditionSubtractionExpression(PhraseForgeParser.QuantAdditionSubtractionExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PhraseForgeParser#asrt_eval}.
 	 * @param ctx the parse tree

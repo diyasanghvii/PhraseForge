@@ -12,8 +12,8 @@ public class Rmain {
             PrintWriter pw = new PrintWriter(filePath.replace("pra", "pge"), StandardCharsets.UTF_8);
             Runtime runtime = new Runtime(iCode.toString().replaceAll("\r", ""));
             runtime.runiCode();
-            System.out.println("Display output here:\n" + runtime.getOutput());
-            pw.println("Output is  :  \n");
+            System.out.println("Output:\n" + runtime.getOutput());
+            pw.println("Output \n");
             pw.println(runtime.getOutput());
             pw.close();
         } catch (Exception e) {

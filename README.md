@@ -58,7 +58,7 @@ To prepare for this Maven project, you need to install Maven and allow all depen
     2. The Java class responsible for compiling and producing intermediate code is called "Compiler".
     3. "RMain" is the Java class responsible for interpreting and generating the final output of the code.
     4. For our purposes, we will use "Integrator" as the main class that runs both Compiler and RMain. It contains the main method.
-    5. Add the following dependency in the pom.xml file of the project : 
+    5. If using a different pom.xml file then add this : 
         <dependencies>
             <!-- https://mvnrepository.com/artifact/org.antlr/antlr4-runtime -->
             <dependency>

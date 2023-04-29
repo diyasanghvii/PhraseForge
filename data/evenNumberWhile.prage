@@ -1,0 +1,18 @@
+pf_launch
+{
+    quant a -> 4
+    while(a $> 0)
+    {
+        %^% expression to check reminder when divided by 2 %^%
+        test( a - (2 * (a/2)) $== 0){
+            reveal(@even_number@,a)
+        }
+        route{
+            reveal(@odd_number@,a)
+        }
+        forge-route
+        forge-test
+        a -> a-1
+    }
+    forge-while
+}pf_abort

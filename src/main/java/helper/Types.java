@@ -1,3 +1,10 @@
+/**
+* Types
+* @author  Diya Sanghvi , Adam Shoaib K
+* @version 1.4
+* @since   2023-04-23
+*/
+
 package helper;
 import java.util.Objects;
 
@@ -13,6 +20,7 @@ public class Types {
         return (Integer) object;
     }
 
+    // Returns the data as a boolean
     public Boolean dataAsBoolean() {
         if(String.valueOf(object)=="on")
             return true;
@@ -22,10 +30,12 @@ public class Types {
         return false;
     }
 
+    // Returns the data as a string
     public String Phrase() {
         return String.valueOf(object);
     }
 
+    // Returns the data type of the object
     public String getDataType() {
         try {
             int i = (Integer) object;
@@ -44,16 +54,16 @@ public class Types {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Types dataType = (Types) o;
-        return Objects.equals(object, dataType.object);
+        return Objects.equals(object, dataType.object); // Compares the underlying data objects for equality
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(object);
+        return Objects.hash(object); // Computes a hash code based on the underlying data object
     }
 
     @Override
     public String toString() {
-        return object.toString();
+        return object.toString(); // Returns the string representation of the underlying data object
     }
 }

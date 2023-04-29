@@ -1,0 +1,11 @@
+pf_launch
+{
+    %^% Program to show first whole numbers %^%
+    reveal(@First_10_whole_numbers@)
+    for(quant i -> 0;; i$<10;; i++)
+    {
+        reveal(i)
+    }
+    forge-for
+}
+pf_abort

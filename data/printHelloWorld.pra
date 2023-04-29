@@ -1,0 +1,3 @@
+LOAD ACC @Hello_World@
+LOAD b ACC
+ECHO b

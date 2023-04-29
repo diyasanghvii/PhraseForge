@@ -24,6 +24,9 @@ pf_launch
         reveal(@tOrf_is_true@)
     }
     forge-test
+    logic g -> on
+    g -> $!g
+    reveal(g)
 
 }
 pf_abort

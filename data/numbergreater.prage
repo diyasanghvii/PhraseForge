@@ -1,0 +1,19 @@
+pf_launch
+{
+    %^% which number is greater %^%
+    quant a -> 10
+    quant b -> 20
+    test(a $> b)
+    {
+        reveal(@greater_number_is_a@)
+        reveal(a)
+    }
+    route
+    {
+        reveal(@greater_number_is_b@)
+        reveal(b)
+    }
+    forge-route
+    forge-test
+}
+pf_abort

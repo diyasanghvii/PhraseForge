@@ -1,0 +1,15 @@
+pf_launch
+{
+    quant h -> 10
+    quant k -> 20
+    quant sum -> h + k
+    quant difference -> h - k
+    quant product -> h * k
+    quant quotient -> k/h
+
+    reveal(@sum@ , sum)
+    reveal(@subtraction@, difference)
+    reveal(@multiplication@ , product)
+    reveal(@Division@ , quotient)
+}
+pf_abort

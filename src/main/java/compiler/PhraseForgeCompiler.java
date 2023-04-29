@@ -1,3 +1,10 @@
+/**
+* Phrase Forge Compiler
+* @author  Diya Sanghvi , Adam Shoaib K
+* @version 1.5
+* @since   2023-04-24
+*/
+
 package compiler;
 
 import gen.PhraseForgeBaseVisitor;

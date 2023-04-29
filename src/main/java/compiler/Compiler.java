@@ -1,3 +1,10 @@
+/**
+* Complier Code
+* @author  Diya Sanghvi , Adam Shoaib K and Dhwanil Parimalsinh
+* @version 1.3
+* @since   2023-04-24
+*/
+
 package compiler;
 import gen.PhraseForgeLexer;
 import gen.PhraseForgeParser;

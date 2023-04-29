@@ -1,3 +1,10 @@
+/**
+* Interpreter Code
+* @author  Diya Sanghvi , Adam Shoaib K
+* @version 1.3
+* @since   2023-04-24
+*/
+
 package compiler;
 public class Intercode {
 

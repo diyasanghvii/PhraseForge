@@ -1,0 +1,11 @@
+pf_launch
+{
+    %^% Program to show numbers in decrement order %^%
+    reveal(@Decrementing_numbers@)
+    for(quant i -> 10;; i$>0;; i--)
+    {
+        reveal(i)
+    }
+    forge-for
+}
+pf_abort

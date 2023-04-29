@@ -102,6 +102,6 @@ There is already an existing Jar file in the repo that you can use to execute yo
         java -jar <projectjarname>.jar <absolutePathOfProgram>\<ProgramName>.prage
 
 
-### [Want to know more about the project ? Click for a short video :](https://youtu.be/HGg0EO5_4q8)
+### Want to know more about the project ? [Click me](https://youtu.be/HGg0EO5_4q8) for a short video.
 
 

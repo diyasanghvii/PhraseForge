@@ -29,10 +29,20 @@ pf_launch
     {
         reveal(@d_equal_to_e@)
     }
+    routeTest(d $>= e){
+        reveal(@d_greaterthan_or_equal_to_e@)
+    }
+    forge-routeTest
+    routeTest(d $<= e){
+            reveal(@d_lessthan_or_equal_to_e@)
+        }
+    forge-routeTest
     route
     {
         reveal(@d_not_equal_to_e@)
     }
+
+
     forge-route
     forge-test
 

@@ -1,0 +1,36 @@
+LOAD ACC 10
+LOAD h ACC
+LOAD ACC 20
+LOAD k ACC
+LOAD ACC h
+LOAD C ACC
+LOAD ACC k
+LOAD D ACC
+ADD ACC C D
+LOAD sum ACC
+LOAD ACC h
+LOAD C ACC
+LOAD ACC k
+LOAD D ACC
+SUB ACC C D
+LOAD difference ACC
+LOAD ACC h
+LOAD C ACC
+LOAD ACC k
+LOAD D ACC
+MUL ACC C D
+LOAD product ACC
+LOAD ACC k
+LOAD C ACC
+LOAD ACC h
+LOAD D ACC
+DIV ACC C D
+LOAD quotient ACC
+ECHO @sum@
+ECHO sum
+ECHO @subtraction@
+ECHO difference
+ECHO @multiplication@
+ECHO product
+ECHO @Division@
+ECHO quotient

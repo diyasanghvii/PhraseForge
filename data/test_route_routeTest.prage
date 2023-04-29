@@ -4,7 +4,7 @@ pf_launch
     quant b -> 22
     quant c -> 33
 
-    test((a $> b) and (a $> c))
+    test((a $> b) $& (a $> c))
     {
         reveal(a)
     }

@@ -1,8 +1,8 @@
 pf_launch
 {
     %^% Program to show first whole numbers %^%
-    revel(@First 10 whole numbers@)
-    for(int i -> 0;; i$<10;; i++)
+    reveal(@First_10_whole_numbers@)
+    for(quant i -> 0;; i$<10;; i++)
     {
         reveal(i)
     }

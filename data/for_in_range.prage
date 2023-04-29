@@ -1,7 +1,8 @@
 pf_launch
 {
     %^% program to show for in range loop %^%
-    for i in the range (1 ;; 6)
+    reveal(@for_loop_in_the_range@)
+    for i in the range (0 ;; 6)
     {
         reveal(i)
     }

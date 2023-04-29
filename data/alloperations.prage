@@ -1,4 +1,4 @@
-start
+pf_launch
 {
     %^% Program with all operations%^%
 
@@ -38,7 +38,7 @@ start
 
     reveal(@revealing_using_for@)
 
-    for i in range (0;; 10)
+    for i in the range (0;; 10)
     {
         reveal(i)
     }
@@ -47,11 +47,11 @@ start
     reveal(@revealing_using_while@)
     quant j -> 0
 
-    while(j < 10)
+    while(j $< 10)
     {
         reveal(j)
         j -> j + 1
     }
     forge-while
 }
-forge
+pf_abort

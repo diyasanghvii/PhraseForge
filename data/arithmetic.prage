@@ -1,7 +1,7 @@
 pf_launch
 {
     quant h -> 10
-    quant b -> 20
+    quant k -> 20
     quant sum -> h + k
     quant difference -> h - k
     quant product -> h * k

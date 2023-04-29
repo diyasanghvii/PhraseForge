@@ -1,5 +1,6 @@
 pf_launch
 {
+    reveal(@greater_number_is@)
     quant a -> 1234567
     quant b -> 2334551
     quant c -> (a $> b) ?? a :: b

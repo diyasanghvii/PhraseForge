@@ -1,5 +1,7 @@
 package helper;
 
+// This is a class named Consts, which contains various constant 
+// values used in the implementation of the programming language. 
 public class Consts {
     public static final String DEFAULT_QUANT = "0";
     public static final String DEFAULT_LOGIC = "OFF";

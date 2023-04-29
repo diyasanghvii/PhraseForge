@@ -11,41 +11,50 @@ import java.util.ArrayList;
 
 public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
 
+    // Initialize an ArrayList to store variables and an Intercode object to generate intermediate code
     private ArrayList<String> var = new ArrayList<>();
     private Intercode iCode = new Intercode();
 
+    // Returns the intermediate code generated so far
     public String getInterCode() {
         return iCode.getiCode();
     }
 
+    // Add a new variable to the list
     public void addVar(String newVar) {
         var.add(newVar);
     }
 
+    // Check if a variable already exists in the list
     public boolean existVar(String newVar) {
         return var.contains(newVar);
     }
 
+    // Print an error message and exit if a variable is referenced before it has been defined
     public void varDoesNotExist(String idf) {
         System.err.println("Compiletime error: Variable " + idf + " not defined. Please define " + idf + "first.");
         System.exit(1);
     }
 
+    // Visit the entire "PhraseForge" program
     @Override
     public Object visitForge_pgm(PhraseForgeParser.Forge_pgmContext ctx) {
         return super.visitChildren(ctx);
     }
 
+    // Visit a block of phrases within the program
     @Override
     public Object visitPhrase_blk(PhraseForgeParser.Phrase_blkContext ctx) {
         return super.visitChildren(ctx);
     }
 
+    // Visit a "Forge" command within the program
     @Override
     public Object visitForge_cmd(PhraseForgeParser.Forge_cmdContext ctx) {
         return super.visitChildren(ctx);
     }
 
+    // Visit a quantitative assignment, where a variable is assigned a numerical value
     @Override
     public Object visitQuantAssignment(PhraseForgeParser.QuantAssignmentContext ctx) {
         String idf = ctx.FORGE_VAR().getText();
@@ -73,6 +82,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // Visit a logical assignment, where a variable is assigned a boolean value
     @Override
     public Object visitLogicAssignment(PhraseForgeParser.LogicAssignmentContext ctx) {
         String idf = ctx.FORGE_VAR().getText();
@@ -104,24 +114,26 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
     public Object visitPhraseAssignment(PhraseForgeParser.PhraseAssignmentContext ctx) {
         String idf = ctx.FORGE_VAR().getText();
 
+        // Check if the phrase is being assigned and add the variable to the list of known variables
         if (ctx.getText().contains("phrase")) {
             addVar(idf);
-        } else if (!existVar(idf)) {
+        } else if (!existVar(idf)) { // If the variable has not been declared, raise an error
             varDoesNotExist(idf);
         }
 
+        // If the phrase has an assertion, visit the assertion expression
         if (ctx.EQT() != null) {
             if (ctx.getText().contains("??") && ctx.getText().contains("::")) {
                 visit(ctx.asrt_tern());
-            } else {
+            } else { // Otherwise, add the phrase to the intermediate code
                 iCode.insertInterOutput(Consts.STR_INSTR + " " +
                         Consts.ACC_REGISTER + " " + ctx.PHRASE_STR().getText());
             }
-        } else {
+        } else {  // If the phrase has no assertion, add the default phrase to the intermediate code
             iCode.insertInterOutput(Consts.STR_INSTR + " " +
                     Consts.ACC_REGISTER + " " + Consts.DEFAULT_PHRASE);
         }
-
+        // Add the variable identifier to the intermediate code
         iCode.insertInterOutput(Consts.STR_INSTR + " " +
                 idf + " " + Consts.ACC_REGISTER);
 
@@ -130,6 +142,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
 
     @Override
     public Object visitAsrts(PhraseForgeParser.AsrtsContext ctx) {
+        // Visit the numeric and boolean assertion expressions
         visit(ctx.asrt_num());
         visit(ctx.asrt_bool());
         return null;
@@ -137,6 +150,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
 
     @Override
     public Object visitLogicExpressionInBrackets(PhraseForgeParser.LogicExpressionInBracketsContext ctx) {
+        // Visit the boolean expression inside the brackets
         visit(ctx.asrt_bool());
         return null;
     }
@@ -146,6 +160,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
 
         String idf = ctx.FORGE_VAR().getText();
 
+        // If the variable exists, add its value to the intermediate code
         if (existVar(idf)) {
             iCode.insertInterOutput(Consts.STR_INSTR + " " + Consts.ACC_REGISTER + " " + idf);
         } else {
@@ -156,13 +171,14 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
 
     @Override
     public Object visitLogicVal(PhraseForgeParser.LogicValContext ctx) {
+        // Add the boolean value to the intermediate code
         iCode.insertInterOutput(Consts.STR_INSTR + " " + Consts.ACC_REGISTER + " " + ctx.PHRASE_BOOL().getText());
         return null;
     }
 
     @Override
     public Object visitLogicLogicalExpression(PhraseForgeParser.LogicLogicalExpressionContext ctx) {
-
+        // Visit the left and right boolean expressions
         visit(ctx.asrt_bool(0));
         iCode.insertInterOutput(Consts.STR_INSTR + " "
                 + Consts.R2 + " "
@@ -322,17 +338,20 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+
+    // This function visits a Parse Tree Context representing a Quant Identifier in the PhraseForge language.
     @Override
     public Object visitQuantIdentifierOnly(PhraseForgeParser.QuantIdentifierOnlyContext ctx) {
 
         String idf = ctx.FORGE_VAR().getText();
 
+        // If the variable exists, it generates intermediate code instructions to load the variable value into the accumulator register.
         if (existVar(idf)) {
             iCode.insertInterOutput(Consts.STR_INSTR + " " + Consts.ACC_REGISTER + " " + idf);
             if (ctx.Subtraction() != null) {
                 iCode.insertInterOutput(Consts.U_MINUS + " " + Consts.ACC_REGISTER);
             }
-        } else {
+        } else { // If the variable does not exist, it throws an error.
             varDoesNotExist(idf);
         }
 
@@ -360,6 +379,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // This method generates intermediate code for evaluating an assertion condition
     @Override
     public Object visitAsrt_eval(PhraseForgeParser.Asrt_evalContext ctx) {
         iCode.insertInterOutput(Consts.COND_STRT);
@@ -368,6 +388,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // This method generates intermediate code for evaluating an If - TEst condition
     @Override
     public Object visitForge_if(PhraseForgeParser.Forge_ifContext ctx) {
 
@@ -387,6 +408,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // This method generates intermediate code for evaluating an Else If - RouteTest condition
     @Override
     public Object visitElse_forge_if(PhraseForgeParser.Else_forge_ifContext ctx) {
         iCode.insertInterOutput(Consts.ROUTE_TEST_STRT);
@@ -396,6 +418,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // This method generates intermediate code for evaluating an Else - Route condition
     @Override
     public Object visitForge_else(PhraseForgeParser.Forge_elseContext ctx) {
         iCode.insertInterOutput(Consts.ROUTE_STRT);
@@ -404,6 +427,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // This method generates intermediate code for evaluating an while condition
     @Override
     public Object visitForge_while(PhraseForgeParser.Forge_whileContext ctx) {
         iCode.insertInterOutput(Consts.WHILE_STRT);
@@ -413,6 +437,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // This method generates intermediate code for evaluating an enhanced for loop
     @Override
     public Object visitForge_enh(PhraseForgeParser.Forge_enhContext ctx) {
         String idf = ctx.FORGE_VAR().getText();
@@ -440,6 +465,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // This method generates intermediate code for evaluating an for loop range
     @Override
     public Object visitForgeRange(PhraseForgeParser.ForgeRangeContext ctx) {
         String value = "0";
@@ -454,6 +480,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // This method generates intermediate code for evaluating an for loop
     @Override
     public Object visitForge_loop(PhraseForgeParser.Forge_loopContext ctx) {
         visit(ctx.forge_asrt());
@@ -467,6 +494,7 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // This method generates intermediate code for evaluating an variable in the for loop used for iteration
     @Override
     public Object visitForge_var(PhraseForgeParser.Forge_varContext ctx) {
         if (ctx.inc_asrt() != null) {
@@ -493,6 +521,9 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
                 + Consts.R4 + " " + Consts.R5);
     }
 
+    // This method visits a declaration and assertion context where the variable is decrement.
+    // It updates the identifier in the "for" loop using the updateIdentifierInFor() method, then
+    // inserts a store instruction to store the updated value back into the variable.    
     @Override
     public Object visitDec_asrt(PhraseForgeParser.Dec_asrtContext ctx) {
         updateIdentifierInFor(Consts.SUBTRACTION, ctx.FORGE_VAR().getText(), "1");
@@ -501,6 +532,9 @@ public class PhraseForgeCompiler extends PhraseForgeBaseVisitor<Object> {
         return null;
     }
 
+    // This method visits a declaration and assertion context where the variable is incremented.    
+    // It updates the identifier in the "for" loop using the updateIdentifierInFor() method, then
+    // inserts a store instruction to store the updated value back into the variable.
     @Override
     public Object visitInc_asrt(PhraseForgeParser.Inc_asrtContext ctx) {
         updateIdentifierInFor(Consts.ADDITION, ctx.FORGE_VAR().getText(), "1");

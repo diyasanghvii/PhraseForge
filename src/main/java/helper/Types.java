@@ -9,12 +9,17 @@ public class Types {
         this.object = object;
     }
 
-    public Integer Quant() {
+    public Integer dataAsInteger() {
         return (Integer) object;
     }
 
-    public Boolean Logic() {
-        return (Boolean) object;
+    public Boolean dataAsBoolean() {
+        if(String.valueOf(object)=="on")
+            return true;
+        else if (String.valueOf(object)=="off") {
+            return false;
+        }
+        return false;
     }
 
     public String Phrase() {
@@ -24,13 +29,13 @@ public class Types {
     public String getDataType() {
         try {
             int i = (Integer) object;
-            return "Quant";
+            return "quant";
         } catch (ClassCastException e) {
             String val = String.valueOf(object);
             if (val.equals("on") || val.equals("off")) {
-                return "Logic";
+                return "logic";
             }
-            return "Phrase";
+            return "phrase";
         }
     }
 

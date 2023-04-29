@@ -11,14 +11,14 @@ forge_cmd
 	;
 
 forge_asrt
-	: 'quant' FORGE_VAR (EQT asrt_num)?
-	| 'quant' FORGE_VAR EQT asrt_tern
-	| 'logic' FORGE_VAR (EQT asrt_bool)?
-	| 'logic' FORGE_VAR (EQT asrt_tern)?
-	| 'phrase' FORGE_VAR (EQT PHRASE_STR)?
-	| 'phrase' FORGE_VAR (EQT PHRASE_STR)?
-	| FORGE_VAR EQT asrt_num
-	| FORGE_VAR EQT asrt_bool
+	: 'quant' FORGE_VAR (EQT asrt_num)?    #quantAssignment
+	| 'quant' FORGE_VAR EQT asrt_tern      #quantAssignment
+	| 'logic' FORGE_VAR (EQT asrt_bool)?   #logicAssignment
+	| 'logic' FORGE_VAR (EQT asrt_tern)?   #logicAssignment
+	| 'phrase' FORGE_VAR (EQT PHRASE_STR)? #phraseAssignment
+	| 'phrase' FORGE_VAR (EQT asrt_tern)?  #phraseAssignment
+	| FORGE_VAR EQT asrt_num    #quantAssignment
+	| FORGE_VAR EQT asrt_bool   #logicAssignment
     ;
 
 asrts
@@ -27,24 +27,24 @@ asrts
     ;
 
 asrt_bool
-    : asrt_bool op=(Logical_AND|Logical_OR) asrt_bool
-    | asrt_bool op=(EqualTo|NotEqualTo ) asrt_bool
-    | asrt_cmp
-    | '(' asrt_bool ')'
-    | PHRASE_BOOL
-    | FORGE_VAR
+    : asrt_bool op=(Logical_AND|Logical_OR|EqualTo|NotEqualTo) asrt_bool #logicLogicalExpression
+    | op=Logical_NOT asrt_bool #logicNot
+    | asrt_cmp # logicComparisonExpression
+    | '(' asrt_bool ')' # logicExpressionInBrackets
+    | PHRASE_BOOL       # logicVal
+    | FORGE_VAR         # logicVarExpression
     ;
 
 asrt_cmp
-    : asrt_num op=(GreaterThan|LesserThan|GreaterThanOrEqualTo|LesserThanOrEqualTo|EqualTo|NotEqualTo ) asrt_num
+    : asrt_num op=(GreaterThan|LesserThan|GreaterThanOrEqualTo|LesserThanOrEqualTo|EqualTo|NotEqualTo) asrt_num  #quantComparisonExpression
     ;
 
 asrt_num
-    : asrt_num op=(Multiplication|Division) asrt_num
-    | asrt_num op=(Addition|Subtraction) asrt_num
-    | '(' asrt_num ')'
-    | Subtraction? PHRASE_NUM
-    | Subtraction? FORGE_VAR
+    : asrt_num op=(Multiplication|Division) asrt_num  #quantMultiplyDivideExpression
+    | asrt_num op=(Addition|Subtraction) asrt_num   #quantAdditionSubtractionExpression
+    | '(' asrt_num ')' #quantBracketsExpression
+    | Subtraction? PHRASE_NUM #quantOnly
+    | Subtraction? FORGE_VAR #quantIdentifierOnly
     ;
 
 asrt_eval
@@ -84,7 +84,7 @@ forge_loop
     : 'for' '(' forge_asrt  ';;' asrt_bool ';;'  forge_var ')' phrase_blk 'forge-for'
     ;
 
- forge_var : inc_asrt| dec_asrt|FORGE_VAR EQT asrt_num;
+forge_var : inc_asrt| dec_asrt|FORGE_VAR EQT asrt_num;
 
 dec_asrt : FORGE_VAR '--'| '--' FORGE_VAR;
 inc_asrt : FORGE_VAR '++'| '++' FORGE_VAR;
@@ -112,6 +112,7 @@ Multiplication      : '*';
 Division            : '/';
 Logical_AND         : '$&';
 Logical_OR          : '$|';
+Logical_NOT         : '$!';
 LesserThan          : '$<';
 GreaterThan         : '$>';
 LesserThanOrEqualTo : '$<=';

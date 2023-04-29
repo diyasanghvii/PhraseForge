@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ANTLRGenerationPreferences">
+    <option name="perGrammarGenerationSettings">
+      <list>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/src/main/Antlr/PhraseForge.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="C:\Users\dsanghv3\IdeaProjects\SER502-Spring2023-Team13\src\main\java" />
+          <option name="libDir" value="C:\Users\dsanghv3\IdeaProjects\SER502-Spring2023-Team13\src\main\Antlr" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="gen" />
+          <option name="language" value="" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+      </list>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">

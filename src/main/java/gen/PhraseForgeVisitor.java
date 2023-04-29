@@ -1,4 +1,5 @@
-package gen;// Generated from C:/Users/dsanghv3/IdeaProjects/SER502-Spring2023-Team13/src/main/Antlr\PhraseForge.g4 by ANTLR 4.12.0
+// Generated from C:/Users/dsanghv3/IdeaProjects/SER502-Spring2023-Team13/src/main/Antlr\PhraseForge.g4 by ANTLR 4.12.0
+package gen;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -28,11 +29,26 @@ public interface PhraseForgeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitForge_cmd(PhraseForgeParser.Forge_cmdContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PhraseForgeParser#forge_asrt}.
+	 * Visit a parse tree produced by the {@code quantAssignment}
+	 * labeled alternative in {@link PhraseForgeParser#forge_asrt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitForge_asrt(PhraseForgeParser.Forge_asrtContext ctx);
+	T visitQuantAssignment(PhraseForgeParser.QuantAssignmentContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code logicAssignment}
+	 * labeled alternative in {@link PhraseForgeParser#forge_asrt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogicAssignment(PhraseForgeParser.LogicAssignmentContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code phraseAssignment}
+	 * labeled alternative in {@link PhraseForgeParser#forge_asrt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPhraseAssignment(PhraseForgeParser.PhraseAssignmentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PhraseForgeParser#asrts}.
 	 * @param ctx the parse tree
@@ -40,23 +56,89 @@ public interface PhraseForgeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAsrts(PhraseForgeParser.AsrtsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PhraseForgeParser#asrt_bool}.
+	 * Visit a parse tree produced by the {@code logicExpressionInBrackets}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAsrt_bool(PhraseForgeParser.Asrt_boolContext ctx);
+	T visitLogicExpressionInBrackets(PhraseForgeParser.LogicExpressionInBracketsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PhraseForgeParser#asrt_cmp}.
+	 * Visit a parse tree produced by the {@code logicLogicalExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAsrt_cmp(PhraseForgeParser.Asrt_cmpContext ctx);
+	T visitLogicLogicalExpression(PhraseForgeParser.LogicLogicalExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PhraseForgeParser#asrt_num}.
+	 * Visit a parse tree produced by the {@code logicVal}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAsrt_num(PhraseForgeParser.Asrt_numContext ctx);
+	T visitLogicVal(PhraseForgeParser.LogicValContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code logicComparisonExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogicComparisonExpression(PhraseForgeParser.LogicComparisonExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code logicNot}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogicNot(PhraseForgeParser.LogicNotContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code logicVarExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_bool}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogicVarExpression(PhraseForgeParser.LogicVarExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code quantComparisonExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_cmp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuantComparisonExpression(PhraseForgeParser.QuantComparisonExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code quantMultiplyDivideExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuantMultiplyDivideExpression(PhraseForgeParser.QuantMultiplyDivideExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code quantBracketsExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuantBracketsExpression(PhraseForgeParser.QuantBracketsExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code quantOnly}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuantOnly(PhraseForgeParser.QuantOnlyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code quantIdentifierOnly}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuantIdentifierOnly(PhraseForgeParser.QuantIdentifierOnlyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code quantAdditionSubtractionExpression}
+	 * labeled alternative in {@link PhraseForgeParser#asrt_num}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuantAdditionSubtractionExpression(PhraseForgeParser.QuantAdditionSubtractionExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PhraseForgeParser#asrt_eval}.
 	 * @param ctx the parse tree

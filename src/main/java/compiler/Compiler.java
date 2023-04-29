@@ -1,5 +1,5 @@
 /**
-* Complier Code
+* Compiler Code (This java class passes the input program to the lexer which then passes it to the parser and then finally to the compiler and creates and stores the intermediate code.
 * @author  Diya Sanghvi , Adam Shoaib K and Dhwanil Parimalsinh
 * @version 1.3
 * @since   2023-04-24

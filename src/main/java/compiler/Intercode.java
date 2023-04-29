@@ -1,5 +1,5 @@
 /**
-* Interpreter Code
+* This Java class is simply a collection of getter files used by the compiler
 * @author  Diya Sanghvi , Adam Shoaib K
 * @version 1.3
 * @since   2023-04-24

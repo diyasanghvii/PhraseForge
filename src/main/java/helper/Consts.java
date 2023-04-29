@@ -1,5 +1,5 @@
 /**
-* Constants
+* Constants dictionary that helps maintain context of the constants between the compiler and runtime.
 * @author  Diya Sanghvi , Adam Shoaib K
 * @version 1.5
 * @since   2023-04-24

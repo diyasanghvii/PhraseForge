@@ -1,5 +1,5 @@
 /**
-* Types
+* Types is a Java class that helps manipulate data and data types back and forth in the Runtime.
 * @author  Diya Sanghvi , Adam Shoaib K
 * @version 1.4
 * @since   2023-04-23

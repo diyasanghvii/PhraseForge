@@ -1,3 +1,9 @@
+/**
+ * Integrator forms a binding between the compiler and runtime for smooth one click execution of the program.
+ * @author  Diya Sanghvi
+ * @version 1.0
+ * @since   2023-04-26
+ */
 package integrator;
 import compiler.Compiler;
 import helper.Rmain;

@@ -74,4 +74,50 @@ Dhwanil Parimalsinh Vashi:
 - Work on ppt and video
 - Create and run 3 test programs
 #########################################
+Contribution after Milestone-1:
 
+Adam Shoaib Kareem Sab:
+- Worked on Compiler(Added support for arithmetic operations, comparison operations, boolean expressions, etc).
+- Worked on Runtime(Added support for arithmetic operations, comparison operations, test, routeTest, route, etc).
+- Added comments and comment headers for the entire project that helped document the code for better understanding.
+- Wrote the EBNF grammar for generating RailRoadDiagramDocument for the language.
+- Wrote the ReadMe file.
+- Helped in creating test programs for sample runs.
+- Created my part of the ppt and video.
+- Managed the repo by ensuring each member followed good practice and standards for committing, pushing and requesting merges. Even gave detailed steps to follow.
+- Helped create custom images for the ppt.
+- Explained the entire Runtime code in the presentation.
+
+Diya Roshan Sanghvi:
+- Worked on the Compiler(Added support for test, routeTest, route, for and while constructs).
+- Worked on the Runtime(Added support functions for runtime and basic instruction director functions and added support for looping constructs).
+- Added support for Unary Not operator.
+- Led the team and made sure git repo was maintained by checking each one's work.
+- Wrote the EBNF grammar for generating RailRoadDiagramDocument for the language.
+- Added last few sections of ReadMe and added comment header files description.
+- Helped in creating test programs for sample runs.
+- Created all the integration files(Integrator) and the base files for generating intermediate code(Compiler) and runtime environment(RMain).
+- Created all the custom images for the ppt.
+- Created my part of the ppt and video.
+- Explained the Lexical Analyser, Parser and Compiler in the presentation.
+
+Harshitha Karur:
+- Work on parser.
+- Work on ppt and video.
+- Create and run 3 test programs.
+- Creation of jar file to run programs.
+- Work on compiler code.
+- Explained the sample programs and did a demo in the presentation.
+
+Dhwanil Vashi:
+- Worked on few compiler codes.
+- Worked on documentation.
+- Worked on ppt.
+- Worked on video.
+- Explained the program flow in the presentation.
+
+Aditi Pandey:
+- Video creation and editing.
+- Creation and execution of 2 test programs.
+- Explained the grammar and language features in the presentation.
+- Worked on the ppt

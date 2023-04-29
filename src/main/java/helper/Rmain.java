@@ -1,5 +1,5 @@
 /**
-* Runtime Main
+* RMain is a helper Java class that creates the final output .pge file after fetching from the runtime.
 * @author  Diya Sanghvi , Adam Shoaib K
 * @version 1.4
 * @since   2023-04-24

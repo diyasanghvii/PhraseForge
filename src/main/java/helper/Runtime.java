@@ -1,5 +1,5 @@
 /**
-* Runtime
+* Runtime is the main interpreter/runtime class for our language. It takes intermediate code, splits it instruction wise, computes and returns the output.
 * @author  Diya Sanghvi , Adam Shoaib K
 * @version 1.9
 * @since   2023-04-24
@@ -226,16 +226,6 @@ public class Runtime {
         try {
             Integer.parseInt(value);
             return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    // This function checks whether a given string can be parsed as a boolean value.
-    private boolean isBoolean(String value) {
-        try {
-            boolean b = Boolean.parseBoolean(value);
-            return b || value.equalsIgnoreCase("FALSE");
         } catch (NumberFormatException e) {
             return false;
         }

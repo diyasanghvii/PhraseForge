@@ -1,7 +1,7 @@
 ## SER502-Spring2023-Team13
 ## PhraseForge ⚒️
 
-A imperative programming language.
+An imperative programming language.
 
 ### That's cool. How did we do this?
 - First we thought about our unique language idea.

@@ -24,7 +24,7 @@ A imperative programming language.
 - Assignment Operator (->)
 - Logical Operators : AND ($&) , OR (&|), NOT (&!)
 - Arithmetic Operators : +, -, *, /
-- Comparision Operators : $>, $<, $>=, $<=, $==, $!=
+- Comparision Operators : $>, $&lt;, $>=, $&lt;=, $==, $!=
 - Ternary Operator : (exp)??asrt1::asrt2
 - Iteration Blocks : while, for, for in the range (enhanced for loop)
 - Condition Blocks : test, routTest, route

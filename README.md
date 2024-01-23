@@ -21,16 +21,16 @@ A imperative programming language.
 
 ### We Got Everything Covered For You
 - Datatypes : integer (quant), boolean (logic), string (phrase)
-- Assignment Operator (->)
-- Logical Operators : AND ($&) , OR (&|), NOT (&!)
-- Arithmetic Operators : +, -, *, /
-- Comparision Operators : $>, $&lt;, $>=, $&lt;=, $==, $!=
+- Assignment Operator `->`
+- Logical Operators : AND `$&` , OR `&|`, NOT `&!`
+- Arithmetic Operators : `+`, `-`, `*`, `/`
+- Comparision Operators : `$>`, `$<`, `$>=`, `$<=`, `$==`, `$!=`
 - Ternary Operator : (exp)??asrt1::asrt2
 - Iteration Blocks : while, for, for in the range (enhanced for loop)
 - Condition Blocks : test, routTest, route
-- Comments : %^% comment %^%
+- Comments : `%^%` comment `%^%`
 - Standard Output : reveal(var)
-- Symbols Support : ;;, {, },(, ), ??, ::
+- Symbols Support : `;;`, `{`, `}`,`(`, `)`, `??`, `::`
 - Identifiers : Starts with digit or alphabet followed by combination of digits, underscore and alphabets.
 - Keywords : quant, logic, phrase, reveal, test, route, routeTest, forge-test, forge-route, forge-routeTest, while, forge-while, for, forge-for, on, off, pf_launch, pf_abort.
 
